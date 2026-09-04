@@ -1,5 +1,9 @@
 {
   "hero.title": "Descubre el Perú",
   "hero.subtitle": "Expediciones inolvidables a los destinos más icónicos de Sudamérica",
-  "hero.cta": "Ver Tours"
+  "hero.cta": "Ver Tours",
+  "blogCta.title": "Explora Nuestro Blog",
+  "blogCta.subtitle": "Descubre Perú a Fondo",
+  "blogCta.description": "Sumérgete en nuestros artículos y descubre lo mejor de Perú. Consejos de viaje, historias fascinantes y guías prácticas para inspirar tus próximas aventuras.",
+  "blogCta.button": "Ver Artículos"
 }
