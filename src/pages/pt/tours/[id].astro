@@ -1,0 +1,36 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const tours = await getCollection('tours');
+  const ptTours = tours.filter((tour) => tour.id.startsWith('pt/'));
+  
+  return ptTours.map((tour) => ({
+    params: { id: tour.id.replace(/^[^/]+\//, '') },
+    props: { tour },
+  }));
+}
+
+const { tour } = Astro.props;
+const { Content } = await render(tour);
+---
+
+<Layout title={tour.data.title}>
+  <main>
+    <h1>{tour.data.title}</h1>
+    
+    <ul>
+      <li><strong>Destino:</strong> {tour.data.destination}</li>
+      <li><strong>Duração:</strong> {tour.data.duration}</li>
+      <li><strong>Tipo:</strong> {tour.data.type}</li>
+      <li><strong>Preço:</strong> ${tour.data.price}</li>
+    </ul>
+
+    <hr />
+
+    <article class="prose prose-lg">
+      <Content />
+    </article>
+  </main>
+</Layout>

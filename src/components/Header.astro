@@ -1,0 +1,44 @@
+---
+const currentLang = Astro.currentLocale || "es";
+const currentPath = Astro.url.pathname;
+
+const languages = [
+  { code: "es", label: "ES" },
+  { code: "en", label: "EN" },
+  { code: "pt", label: "PT" },
+];
+
+function getLocalePath(langCode: string) {
+  return currentPath.replace(/\/(es|en|pt)\//, `/${langCode}/`);
+}
+---
+
+<header class="bg-white shadow-sm">
+  <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href={`/${currentLang}/`} class="text-xl font-bold text-gray-900">
+      Chullpi Expeditions
+    </a>
+
+    <div class="flex items-center gap-6">
+      <a href={`/${currentLang}/tours`} class="text-gray-600 hover:text-gray-900">
+        Tours
+      </a>
+
+      <div class="flex gap-1">
+        {languages.map((lang) => (
+          <a
+            href={getLocalePath(lang.code)}
+            class:list={[
+              "px-2 py-1 text-sm rounded",
+              lang.code === currentLang
+                ? "bg-gray-900 text-white"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200",
+            ]}
+          >
+            {lang.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,27 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const currentLang = Astro.currentLocale || "es";
+
+const tours = await getCollection("tours");
+const enTours = tours.filter((tour) => tour.id.startsWith("en/"));
+---
+
+<Layout>
+  <div>
+    {
+      enTours.map((tour) => {
+        const { data, id } = tour;
+        const slug = id.replace(/^[^/]+\//, "");
+
+        return (
+          <a href={getRelativeLocaleUrl(currentLang, `/tours/${slug}`)}>
+            {data.title}
+          </a>
+        );
+      })
+    }
+  </div>
+</Layout>
