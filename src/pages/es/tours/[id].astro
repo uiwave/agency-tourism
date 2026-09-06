@@ -1,6 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getTranslations } from "@/i18n";
+import TourCard from "@/components/TourCard.astro";
+
+const currentLang = Astro.currentLocale || "es";
+const t = getTranslations(currentLang);
 
 export async function getStaticPaths() {
   const tours = await getCollection("tours");
@@ -14,25 +20,139 @@ export async function getStaticPaths() {
 
 const { tour } = Astro.props;
 const { Content } = await render(tour);
+
+const allTours = await getCollection("tours");
+const relatedTours = allTours
+  .filter((rt) => rt.id.startsWith(`${currentLang}/`) && rt.id !== tour.id)
+  .slice(0, 3)
+  .map((rt) => ({
+    id: rt.id.replace(/^[^/]+\//, ""),
+    title: rt.data.title,
+    duration: rt.data.duration,
+    location: rt.data.destination,
+    price: String(rt.data.price),
+    image: rt.data.image,
+    description: rt.data.description,
+  }));
 ---
 
 <Layout title={tour.data.title}>
-  <div>
-    <main>
-      <h1>{tour.data.title}</h1>
+  <section class="relative w-full h-[50vh] min-h-[400px] overflow-hidden">
+    <img
+      src={tour.data.image}
+      alt={tour.data.title}
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/30" />
+    <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-12">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <a
+          href={getRelativeLocaleUrl(currentLang, "/tours")}
+          class="inline-flex items-center gap-2 text-white/70 hover:text-primary font-body text-sm mb-4 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          {t["tourDetail.backToTours"]}
+        </a>
+        <h1 class="font-heading text-3xl sm:text-5xl text-white tracking-wider uppercase leading-tight font-bold drop-shadow-lg">
+          {tour.data.title}
+        </h1>
+      </div>
+    </div>
+  </section>
 
-      <ul>
-        <li><strong>Destino:</strong> {tour.data.destination}</li>
-        <li><strong>Duración:</strong> {tour.data.duration}</li>
-        <li><strong>Tipo:</strong> {tour.data.type}</li>
-        <li><strong>Precio:</strong> ${tour.data.price}</li>
-      </ul>
+  <section class="w-full py-12 sm:py-16 bg-background text-foreground">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 lg:gap-12">
+        <div class="lg:col-span-2 space-y-8">
+          <article class="prose prose-lg prose-invert max-w-none">
+            <Content />
+          </article>
+        </div>
 
-      <hr />
+        <aside class="space-y-6">
+          <div class="bg-card border border-border/50 rounded-2xl p-6 space-y-6 sticky top-24">
+            <div>
+              <span class="block font-body text-xs text-white/60 uppercase tracking-wider mb-1">
+                {t["tourDetail.from"]}
+              </span>
+              <div class="flex items-baseline gap-2">
+                <span class="font-heading text-4xl text-primary font-bold">
+                  ${tour.data.price}
+                </span>
+                <span class="font-body text-sm text-white/60">USD</span>
+              </div>
+            </div>
 
-      <article class="prose prose-lg">
-        <Content />
-      </article>
-    </main>
-  </div>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <div>
+                  <span class="block font-body text-xs text-white/60 uppercase tracking-wider">{t["tourDetail.destination"]}</span>
+                  <span class="block font-body text-sm text-white font-medium">{tour.data.destination}</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                  <span class="block font-body text-xs text-white/60 uppercase tracking-wider">{t["tourDetail.duration"]}</span>
+                  <span class="block font-body text-sm text-white font-medium">{tour.data.duration}</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                </svg>
+                <div>
+                  <span class="block font-body text-xs text-white/60 uppercase tracking-wider">{t["tourDetail.type"]}</span>
+                  <span class="block font-body text-sm text-white font-medium">{tour.data.type}</span>
+                </div>
+              </div>
+            </div>
+
+            <a
+              href="#"
+              class="block w-full text-center bg-primary hover:bg-primary/90 text-primary-foreground font-heading text-sm font-bold tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shadow-md shadow-primary/30"
+            >
+              {t["tourDetail.bookNow"]}
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  {relatedTours.length > 0 && (
+    <section class="w-full py-16 sm:py-24 bg-surface/50 text-foreground">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-heading text-2xl sm:text-3xl text-white tracking-wider uppercase font-bold mb-8">
+          {t["tourDetail.relatedTours"]}
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {relatedTours.map((rt) => (
+            <TourCard
+              id={rt.id}
+              title={rt.title}
+              duration={rt.duration}
+              location={rt.location}
+              price={rt.price}
+              image={rt.image}
+              description={rt.description}
+              href={getRelativeLocaleUrl(currentLang, `/tours/${rt.id}`)}
+              fromPrice={t["popularTours.fromPrice"]}
+              btnText={t["popularTours.btnText"]}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 </Layout>

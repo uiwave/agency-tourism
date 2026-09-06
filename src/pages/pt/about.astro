@@ -1,0 +1,117 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { getTranslations } from "@/i18n";
+
+const currentLang = Astro.currentLocale || "es";
+const t = getTranslations(currentLang);
+---
+
+<Layout>
+  <section class="w-full py-16 sm:py-24 bg-background text-foreground">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        badge={t["aboutPage.badge"]}
+        title={t["aboutPage.title"]}
+        subtitle={t["aboutPage.subtitle"]}
+        class="mb-16"
+      />
+    </div>
+  </section>
+
+  <section class="w-full py-16 sm:py-24 bg-surface/50 text-foreground">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <h3 class="font-heading text-2xl sm:text-3xl text-white tracking-wider uppercase font-bold">
+            {t["about.title"]}
+          </h3>
+          <p class="font-body text-white/80 leading-relaxed">
+            {t["about.description"]}
+          </p>
+          <div class="grid grid-cols-3 gap-6 pt-6">
+            <div class="text-center">
+              <span class="block font-heading text-3xl sm:text-4xl text-primary font-bold">
+                {t["about.stat1Value"]}
+              </span>
+              <span class="block font-body text-xs sm:text-sm text-white/60 mt-1">
+                {t["about.stat1Label"]}
+              </span>
+            </div>
+            <div class="text-center">
+              <span class="block font-heading text-3xl sm:text-4xl text-primary font-bold">
+                {t["about.stat2Value"]}
+              </span>
+              <span class="block font-body text-xs sm:text-sm text-white/60 mt-1">
+                {t["about.stat2Label"]}
+              </span>
+            </div>
+            <div class="text-center">
+              <span class="block font-heading text-3xl sm:text-4xl text-primary font-bold">
+                {t["about.stat3Value"]}
+              </span>
+              <span class="block font-body text-xs sm:text-sm text-white/60 mt-1">
+                {t["about.stat3Label"]}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="relative rounded-2xl overflow-hidden border border-border/50 aspect-square">
+          <img
+            src="/images/about-agency.jpg"
+            alt={t["about.title"]}
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full py-16 sm:py-24 bg-background text-foreground">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-card border border-border/50 rounded-2xl p-6 space-y-4 hover:border-primary/50 transition-colors">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h4 class="font-heading text-lg text-white font-semibold tracking-wide">
+            {t["about.feature1Title"]}
+          </h4>
+          <p class="font-body text-sm text-white/70 leading-relaxed">
+            {t["about.feature1Desc"]}
+          </p>
+        </div>
+
+        <div class="bg-card border border-border/50 rounded-2xl p-6 space-y-4 hover:border-primary/50 transition-colors">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
+          <h4 class="font-heading text-lg text-white font-semibold tracking-wide">
+            {t["about.feature2Title"]}
+          </h4>
+          <p class="font-body text-sm text-white/70 leading-relaxed">
+            {t["about.feature2Desc"]}
+          </p>
+        </div>
+
+        <div class="bg-card border border-border/50 rounded-2xl p-6 space-y-4 hover:border-primary/50 transition-colors">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h4 class="font-heading text-lg text-white font-semibold tracking-wide">
+            {t["about.feature3Title"]}
+          </h4>
+          <p class="font-body text-sm text-white/70 leading-relaxed">
+            {t["about.feature3Desc"]}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

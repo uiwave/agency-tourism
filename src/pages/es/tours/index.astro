@@ -2,26 +2,59 @@
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { getTranslations } from "@/i18n";
+import TourCard from "@/components/TourCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
 
 const currentLang = Astro.currentLocale || "es";
+const t = getTranslations(currentLang);
 
-const tours = await getCollection("tours");
-const esTours = tours.filter((tour) => tour.id.startsWith("es/"));
+const allTours = await getCollection("tours");
+const tours = allTours
+  .filter((tour) => tour.id.startsWith(`${currentLang}/`))
+  .map((tour) => ({
+    id: tour.id.replace(/^[^/]+\//, ""),
+    title: tour.data.title,
+    duration: tour.data.duration,
+    location: tour.data.destination,
+    price: String(tour.data.price),
+    image: tour.data.image,
+    description: tour.data.description,
+  }));
 ---
 
 <Layout>
-  <div>
-    {
-      esTours.map((tour) => {
-        const { data, id } = tour;
-        const slug = id.replace(/^[^/]+\//, "");
+  <section class="w-full py-16 sm:py-24 bg-background text-foreground">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        badge={t["toursPage.badge"]}
+        title={t["toursPage.title"]}
+        subtitle={t["toursPage.subtitle"]}
+        class="mb-12"
+      />
 
-        return (
-          <a href={getRelativeLocaleUrl(currentLang, `/tours/${slug}`)}>
-            {data.title}
-          </a>
-        );
-      })
-    }
-  </div>
+      {tours.length > 0 ? (
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {tours.map((tour) => (
+            <TourCard
+              id={tour.id}
+              title={tour.title}
+              duration={tour.duration}
+              location={tour.location}
+              price={tour.price}
+              image={tour.image}
+              description={tour.description}
+              href={getRelativeLocaleUrl(currentLang, `/tours/${tour.id}`)}
+              fromPrice={t["popularTours.fromPrice"]}
+              btnText={t["popularTours.btnText"]}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="text-center text-white/60 font-body text-lg">
+          {t["toursPage.noResults"]}
+        </p>
+      )}
+    </div>
+  </section>
 </Layout>

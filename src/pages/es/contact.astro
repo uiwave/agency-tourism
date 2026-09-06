@@ -1,0 +1,26 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ContactSection from "@/components/sections/home/ContactSection.astro";
+import FaqSection from "@/components/sections/home/FaqSection.astro";
+import { getTranslations } from "@/i18n";
+
+const currentLang = Astro.currentLocale || "es";
+const t = getTranslations(currentLang);
+---
+
+<Layout>
+  <section class="w-full py-16 sm:py-24 bg-background text-foreground">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        badge={t["contactPage.badge"]}
+        title={t["contactPage.title"]}
+        subtitle={t["contactPage.subtitle"]}
+        class="mb-16"
+      />
+    </div>
+  </section>
+
+  <ContactSection />
+  <FaqSection />
+</Layout>
