@@ -1,0 +1,92 @@
+---
+import { getTranslations } from "@/i18n";
+
+const currentLang = Astro.currentLocale || "es";
+
+const t = getTranslations(currentLang);
+---
+
+<section class="w-full py-16 sm:py-24 bg-background text-foreground">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+      <!-- COLUMNA IZQUIERDA: Contenido -->
+      <div class="space-y-8">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-border text-primary font-heading text-xs sm:text-sm tracking-[2px]">
+          <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          <span class="text-white font-semibold">{t["about.badge"]}</span>
+        </div>
+
+        <!-- Título -->
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-white tracking-wider uppercase leading-tight font-bold">
+          {t["about.title"]}
+        </h2>
+
+        <!-- Descripción -->
+        <p class="font-body text-white/70 text-base sm:text-lg leading-relaxed">
+          {t["about.description"]}
+        </p>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-3 gap-4 pt-4">
+          <div class="text-center space-y-1">
+            <span class="block font-heading text-3xl sm:text-4xl text-primary font-bold tracking-tight">{t["about.stat1Value"]}</span>
+            <span class="block font-body text-xs sm:text-sm text-white/60">{t["about.stat1Label"]}</span>
+          </div>
+          <div class="text-center space-y-1">
+            <span class="block font-heading text-3xl sm:text-4xl text-primary font-bold tracking-tight">{t["about.stat2Value"]}</span>
+            <span class="block font-body text-xs sm:text-sm text-white/60">{t["about.stat2Label"]}</span>
+          </div>
+          <div class="text-center space-y-1">
+            <span class="block font-heading text-3xl sm:text-4xl text-primary font-bold tracking-tight">{t["about.stat3Value"]}</span>
+            <span class="block font-body text-xs sm:text-sm text-white/60">{t["about.stat3Label"]}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: Features -->
+      <div class="space-y-6">
+        <!-- Feature 1 -->
+        <div class="flex gap-4 p-5 rounded-2xl bg-surface/50 border border-border/50 hover:border-primary/30 transition-colors">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-heading text-base sm:text-lg text-white font-semibold tracking-wide">{t["about.feature1Title"]}</h3>
+            <p class="font-body text-sm text-white/60 mt-1 leading-relaxed">{t["about.feature1Desc"]}</p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="flex gap-4 p-5 rounded-2xl bg-surface/50 border border-border/50 hover:border-primary/30 transition-colors">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-heading text-base sm:text-lg text-white font-semibold tracking-wide">{t["about.feature2Title"]}</h3>
+            <p class="font-body text-sm text-white/60 mt-1 leading-relaxed">{t["about.feature2Desc"]}</p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="flex gap-4 p-5 rounded-2xl bg-surface/50 border border-border/50 hover:border-primary/30 transition-colors">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-heading text-base sm:text-lg text-white font-semibold tracking-wide">{t["about.feature3Title"]}</h3>
+            <p class="font-body text-sm text-white/60 mt-1 leading-relaxed">{t["about.feature3Desc"]}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

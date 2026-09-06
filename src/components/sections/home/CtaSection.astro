@@ -1,0 +1,49 @@
+---
+import { getTranslations } from "@/i18n";
+
+const currentLang = Astro.currentLocale || "es";
+
+const t = getTranslations(currentLang);
+---
+
+<section class="relative w-full py-20 sm:py-28 overflow-hidden">
+  <!-- Fondo con degradado -->
+  <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-primary/10 z-0"></div>
+  <div class="absolute inset-0 bg-surface/50 z-0"></div>
+
+  <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto text-center space-y-8">
+
+      <!-- Título -->
+      <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-white tracking-wider uppercase leading-tight font-bold drop-shadow-lg">
+        {t["cta.title"]}
+      </h2>
+
+      <!-- Descripción -->
+      <p class="font-body text-white/80 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+        {t["cta.description"]}
+      </p>
+
+      <!-- Botones -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <a
+          href={`/${currentLang}/programs`}
+          class="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-heading tracking-widest text-sm sm:text-base px-8 py-3.5 rounded-xl transition-all duration-300 shadow-xl shadow-primary/30 flex items-center justify-center gap-2"
+        >
+          <span>{t["cta.btnPrimary"]}</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+
+        <a
+          href={`/${currentLang}/results`}
+          class="w-full sm:w-auto bg-black/50 hover:bg-black/70 text-white border border-white/30 hover:border-white font-heading tracking-widest text-sm sm:text-base px-8 py-3.5 rounded-xl backdrop-blur-md transition-all duration-300 flex items-center justify-center"
+        >
+          {t["cta.btnSecondary"]}
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>

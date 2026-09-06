@@ -1,66 +1,10 @@
 ---
 import Attend from "@/assets/icons/attend.svg";
+import { getTranslations } from "@/i18n";
 
 const currentLang = Astro.currentLocale || "es";
 
-const translations: Record<string, any> = {
-  es: {
-    tagline: "Descubre las mejores experiencias turísticas en los destinos más increíbles del Perú.",
-    quickLinks: "Navegación",
-    destinations: "Destinos",
-    about: "Sobre Nosotros",
-    contact: "Contacto",
-    legal: "Información Legal",
-    terms: "Términos y Condiciones",
-    privacy: "Política de Privacidad",
-    cookies: "Política de Cookies",
-    claimBook: "Libro de Reclamaciones",
-    contactTitle: "Contacto y Reservas",
-    address: "Av. El Sol 123, Cusco - Perú",
-    phone: "+51 123 456 789",
-    email: "reservas@travelik.com",
-    hours: "Lun - Sáb: 8:00 AM - 8:00 PM",
-    rights: "Todos los derechos reservados.",
-  },
-  en: {
-    tagline: "Discover the best travel experiences in Peru's most incredible destinations.",
-    quickLinks: "Navigation",
-    destinations: "Destinations",
-    about: "About Us",
-    contact: "Contact",
-    legal: "Legal Info",
-    terms: "Terms & Conditions",
-    privacy: "Privacy Policy",
-    cookies: "Cookie Policy",
-    claimBook: "Complaints Book",
-    contactTitle: "Contact & Bookings",
-    address: "123 El Sol Ave, Cusco - Peru",
-    phone: "+51 123 456 789",
-    email: "reservas@travelik.com",
-    hours: "Mon - Sat: 8:00 AM - 8:00 PM",
-    rights: "All rights reserved.",
-  },
-  pt: {
-    tagline: "Descubra as melhores experiências de viagem nos destinos mais incríveis do Peru.",
-    quickLinks: "Navegação",
-    destinations: "Destinos",
-    about: "Sobre Nós",
-    contact: "Contato",
-    legal: "Informação Legal",
-    terms: "Termos e Condições",
-    privacy: "Política de Privacidade",
-    cookies: "Política de Cookies",
-    claimBook: "Livro de Reclamações",
-    contactTitle: "Contato e Reservas",
-    address: "Av. El Sol 123, Cusco - Perú",
-    phone: "+51 123 456 789",
-    email: "reservas@travelik.com",
-    hours: "Seg - Sáb: 8:00 AM - 8:00 PM",
-    rights: "Todos os direitos reservados.",
-  },
-};
-
-const t = translations[currentLang] || translations.es;
+const t = getTranslations(currentLang);
 ---
 
 <footer class="bg-background text-white border-t border-white/10 relative overflow-hidden">
@@ -78,7 +22,7 @@ const t = translations[currentLang] || translations.es;
           />
         </a>
         <p class="text-white/70 text-sm leading-relaxed font-heading tracking-wide">
-          {t.tagline}
+          {t["footer.tagline"]}
         </p>
         
         {/* REDES SOCIALES */}
@@ -98,22 +42,22 @@ const t = translations[currentLang] || translations.es;
       {/* COLUMNA 2: NAVEGACIÓN RÁPIDA */}
       <div>
         <h3 class="text-sm font-heading font-semibold text-white tracking-[2px] uppercase mb-4 border-b border-primary/40 pb-2 inline-block">
-          {t.quickLinks}
+          {t["footer.quickLinks"]}
         </h3>
         <ul class="space-y-2.5 font-heading text-xs sm:text-sm tracking-wider">
           <li>
             <a href={`/${currentLang}/programs`} class="text-white/70 hover:text-primary transition-colors block">
-              {t.destinations}
+              {t["footer.destinations"]}
             </a>
           </li>
           <li>
             <a href={`/${currentLang}/pricing`} class="text-white/70 hover:text-primary transition-colors block">
-              {t.about}
+              {t["footer.about"]}
             </a>
           </li>
           <li>
             <a href={`/${currentLang}/results`} class="text-white/70 hover:text-primary transition-colors block">
-              {t.contact}
+              {t["footer.contact"]}
             </a>
           </li>
         </ul>
@@ -122,28 +66,28 @@ const t = translations[currentLang] || translations.es;
       {/* COLUMNA 3: INFORMACIÓN LEGAL */}
       <div>
         <h3 class="text-sm font-heading font-semibold text-white tracking-[2px] uppercase mb-4 border-b border-primary/40 pb-2 inline-block">
-          {t.legal}
+          {t["footer.legal"]}
         </h3>
         <ul class="space-y-2.5 font-heading text-xs sm:text-sm tracking-wider">
           <li>
             <a href="#" class="text-white/70 hover:text-primary transition-colors block">
-              {t.terms}
+              {t["footer.terms"]}
             </a>
           </li>
           <li>
             <a href="#" class="text-white/70 hover:text-primary transition-colors block">
-              {t.privacy}
+              {t["footer.privacy"]}
             </a>
           </li>
           <li>
             <a href="#" class="text-white/70 hover:text-primary transition-colors block">
-              {t.cookies}
+              {t["footer.cookies"]}
             </a>
           </li>
           <li class="pt-2">
             <a href="#" class="inline-flex items-center gap-2 text-xs font-heading tracking-wider px-3 py-1.5 rounded bg-white/5 border border-white/10 hover:border-primary text-white/80 hover:text-white transition-all">
               <span>📖</span>
-              <span>{t.claimBook}</span>
+              <span>{t["footer.claimBook"]}</span>
             </a>
           </li>
         </ul>
@@ -152,7 +96,7 @@ const t = translations[currentLang] || translations.es;
       {/* COLUMNA 4: CONTACTO Y RESERVAS */}
       <div>
         <h3 class="text-sm font-heading font-semibold text-white tracking-[2px] uppercase mb-4 border-b border-primary/40 pb-2 inline-block">
-          {t.contactTitle}
+          {t["footer.contactTitle"]}
         </h3>
         <div class="space-y-3 font-heading text-xs sm:text-sm tracking-wider text-white/70">
           <div class="flex items-start gap-2.5">
@@ -160,28 +104,28 @@ const t = translations[currentLang] || translations.es;
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
             </svg>
-            <span>{t.address}</span>
+            <span>{t["header.address"]}</span>
           </div>
 
           <div class="flex items-center gap-2.5">
             <div class="text-primary scale-75 shrink-0 -ml-1">
               <Attend />
             </div>
-            <a href="tel:+51123456789" class="hover:text-primary transition-colors">{t.phone}</a>
+            <a href="tel:+51123456789" class="hover:text-primary transition-colors">{t["footer.phone"]}</a>
           </div>
 
           <div class="flex items-center gap-2.5">
             <svg class="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
             </svg>
-            <a href="mailto:reservas@travelik.com" class="hover:text-primary transition-colors">{t.email}</a>
+            <a href="mailto:reservas@travelik.com" class="hover:text-primary transition-colors">{t["footer.email"]}</a>
           </div>
 
           <div class="flex items-center gap-2.5 pt-1">
             <svg class="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
-            <span>{t.hours}</span>
+            <span>{t["header.hours"]}</span>
           </div>
         </div>
       </div>
@@ -192,7 +136,7 @@ const t = translations[currentLang] || translations.es;
   {/* BARRA INFERIOR DE COPYRIGHT */}
   <div class="border-t border-white/10 bg-black/40 py-6">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-heading tracking-wider text-white/50">
-      <p>© {new Date().getFullYear()} TRAVELIK. {t.rights}</p>
+      <p>© {new Date().getFullYear()} TRAVELIK. {t["footer.rights"]}</p>
       <div class="flex items-center space-x-6">
         <span>Cusco - Perú</span>
       </div>
