@@ -30,46 +30,38 @@ const t = getTranslations(currentLang);
 
       <div class="testimonials-track flex gap-6 w-max">
         {[...testimonials, ...testimonials].map((testimonial) => (
-          <article class="flex-none w-[320px] sm:w-[380px] p-6 sm:p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/30 transition-all duration-300 space-y-5">
-            {/* Header: Avatar + Name + Date */}
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                  <span class="font-heading text-sm text-primary font-bold">{testimonial.initials}</span>
-                </div>
-                <div>
-                  <p class="font-heading text-sm text-white font-semibold">{testimonial.name}</p>
-                  <p class="font-body text-xs text-white/50">{testimonial.country}</p>
-                </div>
+          <article class="flex-none w-[320px] sm:w-[380px] p-6 rounded-2xl bg-card border border-border/30 hover:border-border/60 transition-all duration-300 flex flex-col justify-between min-h-[280px]">
+            {/* Rating + Fecha */}
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-1.5">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg
+                    class={`w-3.5 h-3.5 ${star <= testimonial.rating ? "text-green-500" : "text-white/15"}`}
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                ))}
+                <span class="ml-1 font-body text-xs text-white/40">{testimonial.rating}.0</span>
               </div>
-              <span class="font-body text-xs text-white/40 bg-surface/80 px-2 py-1 rounded-full shrink-0">{testimonial.date}</span>
+              <span class="font-body text-xs text-white/30">{testimonial.date}</span>
             </div>
 
-            {/* Estrellas TripAdvisor */}
-            <div class="flex gap-0.5">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <svg
-                  class={`w-4 h-4 ${star <= testimonial.rating ? "text-green-500" : "text-white/20"}`}
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-              ))}
-              <span class="ml-2 font-body text-xs text-white/50 self-center">{testimonial.rating}.0</span>
-            </div>
-
-            {/* Texto del review */}
-            <p class="font-body text-white/70 text-sm sm:text-base leading-relaxed italic line-clamp-5">
-              "{testimonial.text}"
+            {/* Texto */}
+            <p class="font-body text-white/70 text-sm sm:text-[15px] leading-relaxed flex-1">
+              {testimonial.text}
             </p>
 
-            {/* Footer: Trip type */}
-            <div class="pt-3 border-t border-border/50 flex items-center gap-2">
-              <svg class="w-4 h-4 text-primary/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-              </svg>
-              <span class="font-body text-xs text-white/50">{testimonial.tripType}</span>
+            {/* Autor */}
+            <div class="mt-5 pt-4 border-t border-border/30 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
+                <span class="font-heading text-xs text-primary font-bold">{testimonial.initials}</span>
+              </div>
+              <div>
+                <p class="font-heading text-sm text-white font-medium">{testimonial.name}</p>
+                <p class="font-body text-xs text-white/40">{testimonial.country} · {testimonial.tripType}</p>
+              </div>
             </div>
           </article>
         ))}
