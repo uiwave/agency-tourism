@@ -52,3 +52,10 @@
   --surface: #1a2f34;
   --border: #2a3f44;
 }
+
+@layer base{
+  body{
+    font-family: var(--font-body);
+    background-color: var(--background);
+  }
+}

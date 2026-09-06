@@ -1,44 +1,473 @@
 ---
+import LanguageSelector from "./LanguageSelector.astro";
+import Menu from "@/assets/icons/menu.svg";
+import Attend from "@/assets/icons/attend.svg";
+
 const currentLang = Astro.currentLocale || "es";
-const currentPath = Astro.url.pathname;
+
+const translations: Record<string, any> = {
+  es: {
+    destinations: "Destinos",
+    cusco: "Cusco",
+    arequipa: "Arequipa",
+    puno: "Puno",
+    ica: "Ica",
+    about: "Sobre Nosotros",
+    contact: "Contáctanos",
+    reservations: "RESERVAS",
+    address: "Av. El Sol 123, Cusco - Perú",
+    hours: "Lun - Sáb: 8:00 AM - 8:00 PM",
+    menuTitle: "MENÚ",
+  },
+  en: {
+    destinations: "Destinations",
+    cusco: "Cusco",
+    arequipa: "Arequipa",
+    puno: "Puno",
+    ica: "Ica",
+    about: "About Us",
+    contact: "Contact Us",
+    reservations: "BOOKINGS",
+    address: "123 El Sol Ave, Cusco - Peru",
+    hours: "Mon - Sat: 8:00 AM - 8:00 PM",
+    menuTitle: "MENU",
+  },
+  pt: {
+    destinations: "Destinos",
+    cusco: "Cusco",
+    arequipa: "Arequipa",
+    puno: "Puno",
+    ica: "Ica",
+    about: "Sobre Nós",
+    contact: "Contato",
+    reservations: "RESERVAS",
+    address: "Av. El Sol 123, Cusco - Perú",
+    hours: "Seg - Sáb: 8:00 AM - 8:00 PM",
+    menuTitle: "MENU",
+  },
+};
+
+const t = translations[currentLang] || translations.es;
 
 const languages = [
-  { code: "es", label: "ES" },
-  { code: "en", label: "EN" },
-  { code: "pt", label: "PT" },
+  { code: "es", label: "Español", flag: "🇪🇸", codeUpper: "ES" },
+  { code: "en", label: "English", flag: "🇺🇸", codeUpper: "EN" },
+  { code: "pt", label: "Português", flag: "🇧🇷", codeUpper: "PT" },
 ];
 
-function getLocalePath(langCode: string) {
-  return currentPath.replace(/\/(es|en|pt)\//, `/${langCode}/`);
-}
+const currentLangData =
+  languages.find((lang) => lang.code === currentLang) || languages[0];
+
+const navItems = [
+  {
+    label: t.destinations,
+    href: `/${currentLang}/programs`,
+    children: [
+      { label: t.cusco, href: `/${currentLang}/programs/cusco` },
+      { label: t.arequipa, href: `/${currentLang}/programs/arequipa` },
+      { label: t.puno, href: `/${currentLang}/programs/puno` },
+      { label: t.ica, href: `/${currentLang}/programs/ica` },
+    ],
+  },
+  { label: t.about, href: `/${currentLang}/pricing` },
+  { label: t.contact, href: `/${currentLang}/results` },
+];
 ---
 
-<header class="bg-white shadow-sm">
-  <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-    <a href={`/${currentLang}/`} class="text-xl font-bold text-gray-900">
-      Chullpi Expeditions
-    </a>
+<header
+  id="main-header"
+  class="fixed top-0 right-0 left-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-md transition-all duration-300"
+>
+  {/* 1. TOP BAR SUPERIOR */}
+  <div
+    id="top-bar"
+    class="bg-black/60 border-b border-white/10 text-white transition-all duration-300 ease-in-out overflow-hidden max-h-16 opacity-100"
+  >
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-2.5">
+      <div
+        class="flex justify-between items-center text-xs sm:text-sm font-heading font-medium tracking-wider"
+      >
+        {/* Dirección y Horario */}
+        <div class="hidden sm:flex items-center space-x-6">
+          <div class="flex items-center gap-2">
+            <svg
+              class="w-4 h-4 text-primary shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              ></path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <span class="hover:text-primary transition-colors cursor-default"
+              >{t.address}</span
+            >
+          </div>
 
-    <div class="flex items-center gap-6">
-      <a href={`/${currentLang}/tours`} class="text-gray-600 hover:text-gray-900">
-        Tours
-      </a>
+          <span class="text-white/30">|</span>
 
-      <div class="flex gap-1">
-        {languages.map((lang) => (
-          <a
-            href={getLocalePath(lang.code)}
-            class:list={[
-              "px-2 py-1 text-sm rounded",
-              lang.code === currentLang
-                ? "bg-gray-900 text-white"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200",
-            ]}
-          >
-            {lang.label}
-          </a>
-        ))}
+          <div class="flex items-center gap-2">
+            <svg
+              class="w-4 h-4 text-primary shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="hover:text-primary transition-colors cursor-default"
+              >{t.hours}</span
+            >
+          </div>
+        </div>
+
+        {/* Teléfono de reservas */}
+        <div
+          class="flex items-center space-x-6 justify-between sm:justify-end w-full sm:w-auto"
+        >
+          <div class="flex items-center gap-2">
+            <div
+              class="text-primary flex items-center justify-center scale-90 shrink-0"
+            >
+              <Attend />
+            </div>
+            <span class="font-semibold tracking-wider"
+              >{t.reservations}: <a
+                href="tel:+51123456789"
+                class="hover:text-primary transition-colors">+51 123 456 789</a
+              ></span
+            >
+          </div>
+        </div>
       </div>
     </div>
-  </nav>
+  </div>
+
+  {/* 2. HEADER PRINCIPAL (Grid de 3 Columnas) */}
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-3 items-center h-20 w-full">
+      {/* COLUMNA 1: Menú Hamburguesa (<1280px) O Links (>=1280px) */}
+      <div class="flex items-center justify-start">
+        {/* BOTÓN HAMBURGUESA RESPONSIVE */}
+        <button
+          id="open-menu-btn"
+          class="xl:hidden text-primary hover:text-white transition-colors h-11 inline-flex items-center justify-center cursor-pointer"
+          aria-label="Abrir Menú"
+        >
+          <Menu class="w-7 h-7 shrink-0" />
+        </button>
+
+        {/* NAVEGACIÓN ESCRITORIO (>=1280px) */}
+        <nav class="hidden xl:flex space-x-6">
+          {
+            navItems.map((item) => (
+              <div class="relative group flex items-center gap-2 cursor-pointer hover:text-primary transition-colors text-white h-20">
+                <a
+                  href={item.href}
+                  class="text-[clamp(0.9375rem,calc(0.85rem+0.35vw),1.125rem)] leading-6.5 font-heading tracking-[2px] flex items-center gap-2"
+                >
+                  {item.label}
+                </a>
+                {item.children && (
+                  <svg
+                    class="w-5 h-5 transition-transform duration-200 group-hover:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                )}
+
+                {/* DESPLEGABLE DESKTOP */}
+                {item.children && (
+                  <div class="absolute left-0 top-20 hidden group-hover:flex flex-col w-64 bg-white overflow-hidden z-50 shadow-xl">
+                    {item.children.map((child) => (
+                      <a
+                        href={child.href}
+                        class="px-5 py-3.5 text-[clamp(0.9375rem,calc(0.85rem+0.35vw),1.125rem)] leading-6.5 font-heading tracking-[2px] transition-colors text-black hover:bg-primary hover:text-white"
+                      >
+                        {child.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))
+          }
+        </nav>
+      </div>
+
+      {/* COLUMNA 2: Logo (Centrado Exacto) */}
+      <div class="flex justify-center items-center">
+        <a href="/">
+          <img
+            src="/logo-white.webp"
+            alt="TRAVELIK Logo"
+            class="h-10 sm:h-12 xl:h-14 w-auto object-contain transition-all"
+          />
+        </a>
+      </div>
+
+      {/* COLUMNA 3: Botón de Idioma */}
+      <div class="flex justify-end items-center">
+        <div class="relative group h-20 flex items-center">
+          <button
+            class="bg-primary hover:opacity-90 text-primary-foreground text-sm sm:text-[clamp(0.9375rem,calc(0.85rem+0.35vw),1.125rem)] font-heading tracking-widest px-3 sm:px-5 h-10 sm:h-11 rounded-lg inline-flex items-center justify-center gap-1.5 sm:gap-2 transition-all cursor-pointer"
+          >
+            <span class="text-base sm:text-lg">{currentLangData.flag}</span>
+            <span class="pt-0.5">{currentLangData.codeUpper}</span>
+            <svg
+              class="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-200 group-hover:rotate-180 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+
+          {/* DESPLEGABLE DE IDIOMAS */}
+          <div
+            class="absolute right-0 top-20 hidden group-hover:flex flex-col w-44 sm:w-48 bg-white overflow-hidden z-50 shadow-xl border-t-2 border-primary"
+          >
+            {
+              languages.map((lang) => (
+                <a
+                  href={`/${lang.code}`}
+                  class={`px-4 sm:px-5 py-3 sm:py-3.5 text-xs sm:text-[clamp(0.875rem,calc(0.8rem+0.25vw),1rem)] font-heading tracking-[2px] transition-colors flex items-center justify-between ${
+                    currentLang === lang.code
+                      ? "bg-primary text-white"
+                      : "text-black hover:bg-primary/10 hover:text-primary"
+                  }`}
+                >
+                  <div class="flex items-center gap-2.5 sm:gap-3">
+                    <span class="text-sm sm:text-base">{lang.flag}</span>
+                    <span>{lang.codeUpper}</span>
+                  </div>
+                  <span class="text-[10px] sm:text-xs opacity-75 font-normal">
+                    {lang.label}
+                  </span>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
+
+{/* 3. DRAWER / MENÚ LATERAL RESPONSIVE (<1280px) */}
+<div
+  id="mobile-menu-backdrop"
+  class="fixed inset-0 bg-black/70 z-50 opacity-0 pointer-events-none transition-opacity duration-300 xl:hidden"
+>
+</div>
+
+<aside
+  id="mobile-menu-drawer"
+  class="fixed top-0 left-0 bottom-0 w-[85%] max-w-sm bg-black border-r border-white/10 z-50 -translate-x-full transition-transform duration-300 ease-in-out xl:hidden flex flex-col justify-between"
+>
+  <div>
+    {/* CABECERA DRAWER */}
+    <div class="flex items-center justify-between p-6 border-b border-white/10">
+      <span class="text-white font-heading tracking-[2px] text-lg font-semibold"
+        >{t.menuTitle}</span
+      >
+      <button
+        id="close-menu-btn"
+        class="text-white/70 hover:text-primary transition-colors cursor-pointer"
+        aria-label="Cerrar Menú"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    {/* LISTA DE ENLACES RESPONSIVE */}
+    <nav class="p-6 flex flex-col space-y-4">
+      {
+        navItems.map((item) => (
+          <div class="border-b border-white/10 pb-4">
+            {item.children ? (
+              <div>
+                <button class="mobile-accordion-btn flex items-center justify-between w-full text-white font-heading tracking-[2px] text-base hover:text-primary transition-colors cursor-pointer">
+                  <span>{item.label}</span>
+                  <svg
+                    class="w-5 h-5 transition-transform duration-200"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+
+                {/* SUBMENÚ ACCORDEÓN */}
+                <div class="mobile-accordion-content hidden flex-col pl-4 mt-3 space-y-3">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class="text-white/70 font-heading tracking-[2px] text-sm hover:text-primary transition-colors block"
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <a
+                href={item.href}
+                class="text-white font-heading tracking-[2px] text-base hover:text-primary transition-colors block"
+              >
+                {item.label}
+              </a>
+            )}
+          </div>
+        ))
+      }
+    </nav>
+  </div>
+
+  {/* PIE DEL DRAWER */}
+  <div
+    class="p-6 border-t border-white/10 bg-black/40 text-white font-heading tracking-wider text-xs sm:text-sm space-y-3"
+  >
+    <div class="flex items-center gap-2">
+      <svg
+        class="w-4 h-4 text-primary shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+        ></path>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      </svg>
+      <span>{t.address}</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="text-primary scale-75 shrink-0">
+        <Attend />
+      </div>
+      <span class="font-semibold">{t.reservations}: +51 123 456 789</span>
+    </div>
+  </div>
+</aside>
+
+{
+  /* SCRIPT NATIVO PARA INTERACCIÓN DEL DRAWER Y EFECTO DE SCROLL EN HEADER Y TOP-BAR */
+}
+<script>
+  // Control del Drawer Lateral
+  const openBtn = document.getElementById("open-menu-btn");
+  const closeBtn = document.getElementById("close-menu-btn");
+  const drawer = document.getElementById("mobile-menu-drawer");
+  const backdrop = document.getElementById("mobile-menu-backdrop");
+
+  function openMenu() {
+    drawer?.classList.remove("-translate-x-full");
+    backdrop?.classList.remove("opacity-0", "pointer-events-none");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMenu() {
+    drawer?.classList.add("-translate-x-full");
+    backdrop?.classList.add("opacity-0", "pointer-events-none");
+    document.body.style.overflow = "";
+  }
+
+  openBtn?.addEventListener("click", openMenu);
+  closeBtn?.addEventListener("click", closeMenu);
+  backdrop?.addEventListener("click", closeMenu);
+
+  // Acordeón
+  const accordionBtns = document.querySelectorAll(".mobile-accordion-btn");
+  accordionBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const content = btn.nextElementSibling as HTMLElement;
+      const icon = btn.querySelector("svg");
+
+      if (content) {
+        content.classList.toggle("hidden");
+        content.classList.toggle("flex");
+        icon?.classList.toggle("rotate-180");
+      }
+    });
+  });
+
+  // CONTROL DEL SCROLL PARA LA TOP BAR Y EL COLOR DEL HEADER
+  const mainHeader = document.getElementById("main-header");
+  const topBar = document.getElementById("top-bar");
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > 20) {
+      // Ocultar Top Bar
+      topBar?.classList.add("max-h-0", "opacity-0", "py-0");
+      topBar?.classList.remove("max-h-16", "opacity-100");
+
+      // Cambiar fondo del header a bg-background
+      mainHeader?.classList.add("bg-background", "shadow-lg");
+      mainHeader?.classList.remove("bg-black/20", "backdrop-blur-md");
+    } else {
+      // Mostrar Top Bar en el inicio
+      topBar?.classList.remove("max-h-0", "opacity-0", "py-0");
+      topBar?.classList.add("max-h-16", "opacity-100");
+
+      // Restaurar fondo inicial transparente
+      mainHeader?.classList.remove("bg-background", "shadow-lg");
+      mainHeader?.classList.add("bg-black/20", "backdrop-blur-md");
+    }
+
+    lastScrollY = currentScrollY;
+  });
+</script>

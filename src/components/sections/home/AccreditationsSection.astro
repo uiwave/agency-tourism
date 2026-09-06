@@ -1,0 +1,102 @@
+---
+const currentLang = Astro.currentLocale || "es";
+
+const accreditationsData = {
+  badge: "CONFIANZA & SEGURIDAD",
+  title: "Garantía de calidad respaldada internacionalmente",
+  description: "Contamos con todas las certificaciones, registros gubernamentales y licencias de turismo necesarias para ofrecerte un viaje 100% seguro y transparente.",
+  badges: [
+    {
+      code: "CADASTUR",
+      title: "Registro Oficial de Turismo",
+      description: "Ministerio de Turismo de Brasil",
+      icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+    },
+    {
+      code: "IATA",
+      title: "Agencia Certificada",
+      description: "Asociación Internacional de Transporte Aéreo",
+      icon: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h1.5a2.5 2.5 0 002.5-2.5V11.4M9 20c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9z"
+    },
+    {
+      code: "ISO 9001",
+      title: "Gestión de Calidad",
+      description: "Certificación internacional de procesos",
+      icon: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+    },
+    {
+      code: "SAFE TRAVELS",
+      title: "Sello de Viaje Seguro",
+      description: "Consejo Mundial del Viaje y el Turismo (WTTC)",
+      icon: "M5 13l4 4L19 7"
+    }
+  ],
+  logos: [
+    { name: "Ministério do Turismo", text: "CADASTUR" },
+    { name: "IATA Accredited", text: "IATA" },
+    { name: "WTTC Safe Travels", text: "SAFE TRAVELS" },
+    { name: "ABAV", text: "ABAV BRASIL" }
+  ]
+};
+---
+
+<section class="relative w-full py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-zinc-950 text-white select-none">
+  <div class="max-w-7xl mx-auto space-y-16">
+    
+    <!-- ENCABEZADO -->
+    <div class="max-w-3xl space-y-4">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold tracking-widest uppercase text-white/90">
+        <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+        {accreditationsData.badge}
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.15] drop-shadow-md">
+        {accreditationsData.title}
+      </h2>
+
+      <p class="text-base sm:text-lg text-gray-300 font-normal leading-relaxed drop-shadow-sm max-w-2xl">
+        {accreditationsData.description}
+      </p>
+    </div>
+
+    <!-- REJILLA DE TARJETAS DE ACREDITACIÓN -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {
+        accreditationsData.badges.map((item) => (
+          <div class="p-6 sm:p-8 rounded-3xl bg-black/40 backdrop-blur-md border border-white/15 shadow-xl flex flex-col justify-between space-y-6 group hover:border-white/30 transition duration-300">
+            
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition duration-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon}></path>
+                </svg>
+              </div>
+              <span class="text-xs font-extrabold tracking-wider uppercase text-white/50 bg-white/5 px-3 py-1 rounded-full border border-white/10">
+                {item.code}
+              </span>
+            </div>
+
+            <div class="space-y-2">
+              <h3 class="text-lg font-bold text-white group-hover:text-white/90 transition-colors">{item.title}</h3>
+              <p class="text-xs sm:text-sm text-gray-300 font-normal leading-relaxed">{item.description}</p>
+            </div>
+
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- BANDA INFERIOR: LOGOS DE INSTITUCIONES / SOCIOS -->
+    <div class="p-8 rounded-3xl bg-black/30 backdrop-blur-md border border-white/10 flex flex-wrap items-center justify-around gap-8 text-center">
+      {
+        accreditationsData.logos.map((logo) => (
+          <div class="flex items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity cursor-default">
+            <div class="w-3 h-3 rounded-full bg-white/30 group-hover:bg-sky-400 transition-colors"></div>
+            <span class="text-sm sm:text-base font-bold tracking-wider text-gray-200 uppercase">{logo.text}</span>
+          </div>
+        ))
+      }
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,146 @@
+---
+const currentLang = Astro.currentLocale || "es";
+
+const popularToursData = {
+  badge: "LO MÁS RESERVADO",
+  title: "Tours y Experiencias Populares",
+  description: "Explora las excursiones y circuitos más solicitados por nuestros viajeros con guía en español.",
+  tours: [
+    {
+      id: "rio-express",
+      title: "Río Esencial: Cristo Redentor & Pan de Azúcar",
+      location: "Río de Janeiro",
+      duration: "1 Día / 8 Horas",
+      rating: "4.9",
+      reviewsCount: 128,
+      price: "US$ 85",
+      image: "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&w=1000&auto=format&fit=crop",
+      badgeText: "Bestseller"
+    },
+    {
+      id: "arraial-boat",
+      title: "Paseo en Barco por Arraial do Cabo",
+      location: "Arraial do Cabo",
+      duration: "1 Día / 10 Horas",
+      rating: "4.8",
+      reviewsCount: 94,
+      price: "US$ 65",
+      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000&auto=format&fit=crop",
+      badgeText: "Imperdible"
+    },
+    {
+      id: "angra-ilha-grande",
+      title: "Schooner Cruise Angra & Ilha Grande",
+      location: "Angra dos Reis",
+      duration: "1 Día / 12 Horas",
+      rating: "4.9",
+      reviewsCount: 210,
+      price: "US$ 75",
+      image: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=1000&auto=format&fit=crop",
+      badgeText: "Recomendado"
+    }
+  ]
+};
+---
+
+<section class="relative w-full py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-zinc-950 text-white select-none">
+  <div class="max-w-7xl mx-auto space-y-16">
+    
+    <!-- ENCABEZADO Y BOTÓN VER TODOS -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold tracking-widest uppercase text-white/90">
+          <span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+          {popularToursData.badge}
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.15] drop-shadow-md">
+          {popularToursData.title}
+        </h2>
+
+        <p class="text-base sm:text-lg text-gray-300 font-normal leading-relaxed drop-shadow-sm max-w-2xl">
+          {popularToursData.description}
+        </p>
+      </div>
+
+      <div>
+        <a 
+          href={`/${currentLang}/tours`}
+          class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-sm font-bold text-white transition duration-300 shrink-0"
+        >
+          <span>Ver todos los tours</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- REJILLA DE TARJETAS DE TOURS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        popularToursData.tours.map((tour) => (
+          <div class="group rounded-3xl bg-black/40 backdrop-blur-md border border-white/15 overflow-hidden shadow-xl flex flex-col justify-between transition duration-300 hover:border-white/30 hover:scale-[1.01]">
+            
+            <!-- CONTENEDOR DE IMAGEN -->
+            <div class="relative h-60 w-full overflow-hidden">
+              <img 
+                src={tour.image} 
+                alt={tour.title}
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+              <!-- BADGE SUPERIOR -->
+              <div class="absolute top-4 left-4">
+                <span class="px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-xs font-extrabold text-white">
+                  {tour.badgeText}
+                </span>
+              </div>
+
+              <!-- CALIFICACIÓN -->
+              <div class="absolute bottom-4 left-4 flex items-center gap-1.5 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <span class="text-xs font-bold text-white">{tour.rating}</span>
+                <span class="text-xs text-gray-400">({tour.reviewsCount})</span>
+              </div>
+            </div>
+
+            <!-- DETALLES Y PRECIO -->
+            <div class="p-6 sm:p-8 space-y-6 flex-1 flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="flex items-center gap-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                  <span>{tour.location}</span>
+                  <span>•</span>
+                  <span>{tour.duration}</span>
+                </div>
+
+                <h3 class="text-xl font-bold text-white group-hover:text-amber-300 transition-colors leading-snug">
+                  {tour.title}
+                </h3>
+              </div>
+
+              <div class="pt-4 border-t border-white/10 flex items-center justify-between gap-4">
+                <div>
+                  <span class="text-xs text-gray-400 block">Desde</span>
+                  <span class="text-xl font-extrabold text-white">{tour.price}</span>
+                </div>
+
+                <a 
+                  href={`/${currentLang}/tours/${tour.id}`}
+                  class="px-5 py-2.5 rounded-full bg-white text-black font-bold text-xs hover:bg-gray-200 transition-colors shadow-lg"
+                >
+                  Detalles
+                </a>
+              </div>
+            </div>
+
+          </div>
+        ))
+      }
+    </div>
+
+  </div>
+</section>
