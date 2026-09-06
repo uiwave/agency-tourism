@@ -1,7 +1,10 @@
 {
-  "hero.title": "Descubre el Perú",
-  "hero.subtitle": "Expediciones inolvidables a los destinos más icónicos de Sudamérica",
-  "hero.cta": "Ver Tours",
+  "hero.badge": "EXPEDICIONES ÚNICAS EN PERÚ",
+  "hero.titleLine1": "Tu Puerta a la Aventura",
+  "hero.titleLine2": "en Perú",
+  "hero.subtitle": "Descubre la majestuosidad de Machu Picchu con nuestra agencia. Te ofrecemos visitas guiadas, rutas de trekking y experiencias auténticas para que vivas la historia inca de manera inolvidable.",
+  "hero.btnPrimary": "EXPLORAR DESTINOS",
+  "hero.btnSecondary": "VER PROMOS",
   "blogCta.title": "Explora Nuestro Blog",
   "blogCta.subtitle": "Descubre Perú a Fondo",
   "blogCta.description": "Sumérgete en nuestros artículos y descubre lo mejor de Perú. Consejos de viaje, historias fascinantes y guías prácticas para inspirar tus próximas aventuras.",

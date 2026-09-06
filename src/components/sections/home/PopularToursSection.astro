@@ -1,146 +1,515 @@
 ---
 const currentLang = Astro.currentLocale || "es";
 
-const popularToursData = {
-  badge: "LO MÁS RESERVADO",
-  title: "Tours y Experiencias Populares",
-  description: "Explora las excursiones y circuitos más solicitados por nuestros viajeros con guía en español.",
-  tours: [
-    {
-      id: "rio-express",
-      title: "Río Esencial: Cristo Redentor & Pan de Azúcar",
-      location: "Río de Janeiro",
-      duration: "1 Día / 8 Horas",
-      rating: "4.9",
-      reviewsCount: 128,
-      price: "US$ 85",
-      image: "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&w=1000&auto=format&fit=crop",
-      badgeText: "Bestseller"
-    },
-    {
-      id: "arraial-boat",
-      title: "Paseo en Barco por Arraial do Cabo",
-      location: "Arraial do Cabo",
-      duration: "1 Día / 10 Horas",
-      rating: "4.8",
-      reviewsCount: 94,
-      price: "US$ 65",
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000&auto=format&fit=crop",
-      badgeText: "Imperdible"
-    },
-    {
-      id: "angra-ilha-grande",
-      title: "Schooner Cruise Angra & Ilha Grande",
-      location: "Angra dos Reis",
-      duration: "1 Día / 12 Horas",
-      rating: "4.9",
-      reviewsCount: 210,
-      price: "US$ 75",
-      image: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=1000&auto=format&fit=crop",
-      badgeText: "Recomendado"
-    }
-  ]
+const translations: Record<string, any> = {
+  es: {
+    sectionBadge: "EXPERIENCIAS TOP",
+    sectionTitle: "TOURS POPULARES EN PERÚ",
+    sectionSubtitle:
+      "Viajes seleccionados con guías locales expertos y servicio personalizado todo incluido.",
+    btnText: "Reservar",
+    fromPrice: "Desde",
+    tours: [
+      {
+        id: "machu-picchu-full-day",
+        title: "Machu Picchu Clásico Full Day",
+        duration: "1 Día",
+        location: "Cusco",
+        price: "280",
+        image:
+          "https://images.unsplash.com/photo-1526392060635-9d6019884377?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Recorre la majestuosa ciudadela inca de Machu Picchu con guía privado y tren panorámico.",
+      },
+      {
+        id: "valle-sagrado-cusco",
+        title: "Valle Sagrado y Ollantaytambo",
+        duration: "1 Día",
+        location: "Cusco",
+        price: "120",
+        image:
+          "https://images.unsplash.com/photo-1589802829985-817e51171b92?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Conoce Pisac, Maras, Moray y la fortaleza de Ollantaytambo en el corazón del Valle.",
+      },
+      {
+        id: "montana-7-colores",
+        title: "Montaña de 7 Colores (Vinicunca)",
+        duration: "1 Día",
+        location: "Cusco",
+        price: "85",
+        image:
+          "https://images.unsplash.com/photo-1580619305218-8423a7ef79b4?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Una caminata inolvidable hacia una de las maravillas naturales más impresionantes.",
+      },
+      {
+        id: "laguna-humantay",
+        title: "Trekking a la Laguna Humantay",
+        duration: "1 Día",
+        location: "Cusco",
+        price: "90",
+        image:
+          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Embárcate en un trekking mágico hacia aguas turquesas rodeadas de nevados.",
+      },
+      {
+        id: "camino-inca-4d3n",
+        title: "Camino Inca Ancestral (4D/3N)",
+        duration: "4 Días",
+        location: "Cusco",
+        price: "650",
+        image:
+          "https://images.unsplash.com/photo-1568632234137-a2327eb2d847?q=80&w=800&auto=format&fit=crop",
+        description:
+          "La ruta de senderismo más icónica ingresando por la Inti Punku a Machu Picchu.",
+      },
+      {
+        id: "oasis-huacachina-ica",
+        title: "Oasis de Huacachina y Nazca",
+        duration: "2 Días",
+        location: "Ica",
+        price: "210",
+        image:
+          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Adrenalina en buggies por las dunas de Ica y sobrevuelo por las Líneas de Nazca.",
+      },
+    ],
+  },
+  en: {
+    sectionBadge: "TOP EXPERIENCES",
+    sectionTitle: "POPULAR TOURS IN PERU",
+    sectionSubtitle:
+      "Handpicked journeys with expert local guides and tailored all-inclusive services.",
+    btnText: "Book Now",
+    fromPrice: "From",
+    tours: [
+      {
+        id: "machu-picchu-full-day",
+        title: "Classic Machu Picchu Full Day",
+        duration: "1 Day",
+        location: "Cusco",
+        price: "280",
+        image:
+          "https://images.unsplash.com/photo-1526392060635-9d6019884377?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Explore the majestic Inca citadel of Machu Picchu with a private guide and panoramic train.",
+      },
+      {
+        id: "valle-sagrado-cusco",
+        title: "Sacred Valley & Ollantaytambo",
+        duration: "1 Day",
+        location: "Cusco",
+        price: "120",
+        image:
+          "https://images.unsplash.com/photo-1589802829985-817e51171b92?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Discover Pisac, Maras, Moray, and the ancient fortress of Ollantaytambo.",
+      },
+      {
+        id: "montana-7-colores",
+        title: "Rainbow Mountain Trek",
+        duration: "1 Day",
+        location: "Cusco",
+        price: "85",
+        image:
+          "https://images.unsplash.com/photo-1580619305218-8423a7ef79b4?q=80&w=800&auto=format&fit=crop",
+        description:
+          "An unforgettable hike to one of the most stunning natural wonders of the Andes.",
+      },
+      {
+        id: "laguna-humantay",
+        title: "Humantay Lake Trekking",
+        duration: "1 Day",
+        location: "Cusco",
+        price: "90",
+        image:
+          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Embark on a scenic hike to turquoise waters surrounded by majestic glacier mountains.",
+      },
+      {
+        id: "camino-inca-4d3n",
+        title: "Classic Inca Trail (4D/3N)",
+        duration: "4 Days",
+        location: "Cusco",
+        price: "650",
+        image:
+          "https://images.unsplash.com/photo-1568632234137-a2327eb2d847?q=80&w=800&auto=format&fit=crop",
+        description:
+          "South America's most legendary trekking route entering through the Sun Gate.",
+      },
+      {
+        id: "oasis-huacachina-ica",
+        title: "Huacachina Oasis & Nazca",
+        duration: "2 Days",
+        location: "Ica",
+        price: "210",
+        image:
+          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Dune buggy adrenaline in the Ica desert and flight over the mysterious Nazca Lines.",
+      },
+    ],
+  },
+  pt: {
+    sectionBadge: "EXPERIÊNCIAS TOP",
+    sectionTitle: "PASSEIOS POPULARES NO PERU",
+    sectionSubtitle:
+      "Viagens selecionadas com guias locais especialistas e serviço personalizado.",
+    btnText: "Reservar",
+    fromPrice: "A partir de",
+    tours: [
+      {
+        id: "machu-picchu-full-day",
+        title: "Machu Picchu Clássico Full Day",
+        duration: "1 Dia",
+        location: "Cusco",
+        price: "280",
+        image:
+          "https://images.unsplash.com/photo-1526392060635-9d6019884377?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Conheça a majestosa cidadela inca com guia privativo e trem panorâmico.",
+      },
+      {
+        id: "valle-sagrado-cusco",
+        title: "Vale Sagrado e Ollantaytambo",
+        duration: "1 Dia",
+        location: "Cusco",
+        price: "120",
+        image:
+          "https://images.unsplash.com/photo-1589802829985-817e51171b92?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Visite Pisac, Maras, Moray e a fortaleza de Ollantaytambo no Vale Sagrado.",
+      },
+      {
+        id: "montana-7-colores",
+        title: "Montanha das 7 Cores",
+        duration: "1 Dia",
+        location: "Cusco",
+        price: "85",
+        image:
+          "https://images.unsplash.com/photo-1580619305218-8423a7ef79b4?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Uma caminhada inesquecível rumo a uma das maravilhas naturais dos Andes.",
+      },
+      {
+        id: "laguna-humantay",
+        title: "Trekking à Laguna Humantay",
+        duration: "1 Dia",
+        location: "Cusco",
+        price: "90",
+        image:
+          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Embarque em uma caminhada mágica até águas turquesas cercadas por montanhas.",
+      },
+      {
+        id: "camino-inca-4d3n",
+        title: "Trilha Inca Clássica (4D/3N)",
+        duration: "4 Dias",
+        location: "Cusco",
+        price: "650",
+        image:
+          "https://images.unsplash.com/photo-1568632234137-a2327eb2d847?q=80&w=800&auto=format&fit=crop",
+        description:
+          "A rota de caminhada mais famosa da América do Sul entrando pela Porta do Sol.",
+      },
+      {
+        id: "oasis-huacachina-ica",
+        title: "Oásis de Huacachina e Nazca",
+        duration: "2 Dias",
+        location: "Ica",
+        price: "210",
+        image:
+          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
+        description:
+          "Adrenalina em buggies nas dunas de Ica e sobrevoo pelas Linhas de Nazca.",
+      },
+    ],
+  },
 };
+
+const t = translations[currentLang] || translations.es;
 ---
 
-<section class="relative w-full py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-zinc-950 text-white select-none">
-  <div class="max-w-7xl mx-auto space-y-16">
-    
-    <!-- ENCABEZADO Y BOTÓN VER TODOS -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
-      <div class="max-w-3xl space-y-4">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold tracking-widest uppercase text-white/90">
-          <span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
-          {popularToursData.badge}
+<section
+  class="w-full py-12 sm:py-20 bg-background text-foreground overflow-hidden"
+>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    {/* CABECERA */}
+    <div
+      class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-5"
+    >
+      <div class="space-y-2.5 max-w-2xl">
+        <div
+          class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface border border-border text-primary font-heading text-xs sm:text-sm tracking-[2px]"
+        >
+          <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          <span class="text-white font-semibold">{t.sectionBadge}</span>
         </div>
-
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.15] drop-shadow-md">
-          {popularToursData.title}
+        <h2
+          class="font-heading text-2xl sm:text-5xl lg:text-6xl text-white tracking-wider uppercase leading-tight font-bold"
+        >
+          {t.sectionTitle}
         </h2>
-
-        <p class="text-base sm:text-lg text-gray-300 font-normal leading-relaxed drop-shadow-sm max-w-2xl">
-          {popularToursData.description}
+        <p
+          class="font-body text-white/90 text-sm sm:text-lg font-normal leading-relaxed"
+        >
+          {t.sectionSubtitle}
         </p>
       </div>
 
-      <div>
-        <a 
-          href={`/${currentLang}/tours`}
-          class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-sm font-bold text-white transition duration-300 shrink-0"
+      {
+        /* CONTROLES DE NAVEGACIÓN (OCULTOS EN MÓVIL PEQUEÑO, VISIBLES DESDE SM) */
+      }
+      <div class="hidden sm:flex items-center gap-3 self-end md:self-auto">
+        <button
+          id="prevBtn"
+          aria-label="Anterior"
+          class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface/80 hover:bg-card border border-border hover:border-primary text-white flex items-center justify-center transition-all duration-200 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-md backdrop-blur-md"
         >
-          <span>Ver todos los tours</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M15 19l-7-7 7-7"></path>
           </svg>
-        </a>
+        </button>
+
+        <button
+          id="nextBtn"
+          aria-label="Siguiente"
+          class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center transition-all duration-200 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-lg shadow-primary/30"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
       </div>
     </div>
 
-    <!-- REJILLA DE TARJETAS DE TOURS -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {/* CARRUSEL OPTIMIZADO PARA MÓVIL Y DESKTOP */}
+    <div
+      id="toursCarousel"
+      class="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-none scroll-smooth snap-x snap-mandatory py-2 -mx-4 px-4 sm:mx-0 sm:px-0"
+      style="scrollbar-width: none; -ms-overflow-style: none;"
+    >
       {
-        popularToursData.tours.map((tour) => (
-          <div class="group rounded-3xl bg-black/40 backdrop-blur-md border border-white/15 overflow-hidden shadow-xl flex flex-col justify-between transition duration-300 hover:border-white/30 hover:scale-[1.01]">
-            
-            <!-- CONTENEDOR DE IMAGEN -->
-            <div class="relative h-60 w-full overflow-hidden">
-              <img 
-                src={tour.image} 
-                alt={tour.title}
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+        t.tours.map((tour: any) => (
+          <article class="flex-none w-[82%] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)] snap-center sm:snap-start group cursor-pointer">
+            {/* CARD TIPO EDITORIAL CON ALTO MÓVIL ADAPTATIVO */}
+            <div class="relative w-full h-[400px] sm:h-[460px] rounded-2xl overflow-hidden border border-border/80 hover:border-primary/80 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 flex flex-col justify-between p-4 sm:p-6 bg-card">
+              {/* 1. IMAGEN DE FONDO */}
+              <div class="absolute inset-0 z-0">
+                <img
+                  src={tour.image}
+                  alt={tour.title}
+                  loading="lazy"
+                  class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/30 group-hover:via-black/60 transition-colors" />
+              </div>
 
-              <!-- BADGE SUPERIOR -->
-              <div class="absolute top-4 left-4">
-                <span class="px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-xs font-extrabold text-white">
-                  {tour.badgeText}
+              {/* 2. ETIQUETAS SUPERIORES */}
+              <div class="relative z-10 flex items-center justify-between gap-1.5">
+                <span class="px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white font-body text-xs sm:text-sm font-semibold flex items-center gap-1.5 shadow-md">
+                  <svg
+                    class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  {tour.location}
+                </span>
+
+                <span class="px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white font-body text-xs sm:text-sm font-semibold flex items-center gap-1.5 shadow-md">
+                  <svg
+                    class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  {tour.duration}
                 </span>
               </div>
 
-              <!-- CALIFICACIÓN -->
-              <div class="absolute bottom-4 left-4 flex items-center gap-1.5 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-                <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                <span class="text-xs font-bold text-white">{tour.rating}</span>
-                <span class="text-xs text-gray-400">({tour.reviewsCount})</span>
-              </div>
-            </div>
-
-            <!-- DETALLES Y PRECIO -->
-            <div class="p-6 sm:p-8 space-y-6 flex-1 flex flex-col justify-between">
-              <div class="space-y-3">
-                <div class="flex items-center gap-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                  <span>{tour.location}</span>
-                  <span>•</span>
-                  <span>{tour.duration}</span>
-                </div>
-
-                <h3 class="text-xl font-bold text-white group-hover:text-amber-300 transition-colors leading-snug">
+              {/* 3. CONTENIDO INFERIOR */}
+              <div class="relative z-10 space-y-2.5 sm:space-y-3.5 pt-4">
+                <h3 class="font-heading text-lg sm:text-2xl text-white font-semibold tracking-wide leading-tight group-hover:text-primary transition-colors line-clamp-2 drop-shadow-md">
                   {tour.title}
                 </h3>
-              </div>
 
-              <div class="pt-4 border-t border-white/10 flex items-center justify-between gap-4">
-                <div>
-                  <span class="text-xs text-gray-400 block">Desde</span>
-                  <span class="text-xl font-extrabold text-white">{tour.price}</span>
+                <p class="font-body text-xs sm:text-sm text-white/95 line-clamp-2 leading-relaxed font-normal drop-shadow-sm">
+                  {tour.description}
+                </p>
+
+                {/* PRECIO Y BOTÓN */}
+                <div class="pt-3 border-t border-white/25 flex items-center justify-between">
+                  <div>
+                    <span class="block text-[10px] sm:text-xs font-body text-white/80 uppercase tracking-wider font-medium">
+                      {t.fromPrice}
+                    </span>
+                    <div class="flex items-baseline gap-1">
+                      <span class="font-heading text-xl sm:text-3xl text-primary font-bold tracking-tight">
+                        ${tour.price}
+                      </span>
+                      <span class="text-[10px] sm:text-xs text-white/90 font-medium">
+                        USD
+                      </span>
+                    </div>
+                  </div>
+
+                  <a
+                    href={`/${currentLang}/tours/${tour.id}`}
+                    class="bg-primary hover:bg-primary/90 text-primary-foreground font-heading text-xs sm:text-sm font-bold tracking-wider px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl transition-all duration-300 transform group-hover:-translate-y-0.5 shadow-md shadow-primary/30 flex items-center gap-1.5"
+                  >
+                    <span>{t.btnText}</span>
+                    <svg
+                      class="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-200 group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2.5"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </a>
                 </div>
-
-                <a 
-                  href={`/${currentLang}/tours/${tour.id}`}
-                  class="px-5 py-2.5 rounded-full bg-white text-black font-bold text-xs hover:bg-gray-200 transition-colors shadow-lg"
-                >
-                  Detalles
-                </a>
               </div>
             </div>
-
-          </div>
+          </article>
         ))
       }
     </div>
 
+    {/* INDICADOR DE PUNTOS PARA NAVEGACIÓN EN MÓVIL (DOTS) */}
+    <div
+      id="carouselDots"
+      class="flex sm:hidden items-center justify-center gap-2 mt-6"
+    >
+      {
+        t.tours.map((_: any, index: number) => (
+          <span
+            data-index={index}
+            class="dot-indicator w-2.5 h-2.5 rounded-full bg-white/30 transition-all duration-300"
+          />
+        ))
+      }
+    </div>
   </div>
 </section>
+
+<style>
+  #toursCarousel::-webkit-scrollbar {
+    display: none;
+  }
+  .dot-indicator.active {
+    background-color: var(--color-primary, #eab308);
+    width: 1.25rem;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const carousel = document.getElementById(
+      "toursCarousel",
+    ) as HTMLElement | null;
+    const prevBtn = document.getElementById(
+      "prevBtn",
+    ) as HTMLButtonElement | null;
+    const nextBtn = document.getElementById(
+      "nextBtn",
+    ) as HTMLButtonElement | null;
+    const dots = document.querySelectorAll(".dot-indicator");
+
+    if (!carousel) return;
+
+    const getScrollAmount = () => {
+      const firstCard = carousel.querySelector("article");
+      if (!firstCard) return 300;
+      const gap = window.innerWidth < 640 ? 16 : 24;
+      return firstCard.clientWidth + gap;
+    };
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        carousel.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        carousel.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
+      });
+    }
+
+    const updateCarouselState = () => {
+      // 1. Deshabilitar botones de flecha cuando corresponde
+      if (prevBtn && nextBtn) {
+        const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth - 5;
+        prevBtn.disabled = carousel.scrollLeft <= 5;
+        nextBtn.disabled = carousel.scrollLeft >= maxScrollLeft;
+      }
+
+      // 2. Actualizar puntos (dots) de navegación en pantallas móviles
+      if (dots.length > 0) {
+        const cardWidth = getScrollAmount();
+        const activeIndex = Math.round(carousel.scrollLeft / cardWidth);
+
+        dots.forEach((dot, idx) => {
+          if (idx === activeIndex) {
+            dot.classList.add("active");
+          } else {
+            dot.classList.remove("active");
+          }
+        });
+      }
+    };
+
+    carousel.addEventListener("scroll", updateCarouselState);
+    window.addEventListener("resize", updateCarouselState);
+    updateCarouselState();
+  });
+</script>
