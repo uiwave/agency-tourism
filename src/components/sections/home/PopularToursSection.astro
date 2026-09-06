@@ -1,238 +1,24 @@
 ---
+import { getTranslations } from "@/i18n";
+import { getCollection } from "astro:content";
+import TourCard from "@/components/TourCard.astro";
+
 const currentLang = Astro.currentLocale || "es";
 
-const translations: Record<string, any> = {
-  es: {
-    sectionBadge: "EXPERIENCIAS TOP",
-    sectionTitle: "TOURS POPULARES EN PERÚ",
-    sectionSubtitle:
-      "Viajes seleccionados con guías locales expertos y servicio personalizado todo incluido.",
-    btnText: "Reservar",
-    fromPrice: "Desde",
-    tours: [
-      {
-        id: "machu-picchu-full-day",
-        title: "Machu Picchu Clásico Full Day",
-        duration: "1 Día",
-        location: "Cusco",
-        price: "280",
-        image:
-          "https://images.unsplash.com/photo-1526392060635-9d6019884377?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Recorre la majestuosa ciudadela inca de Machu Picchu con guía privado y tren panorámico.",
-      },
-      {
-        id: "valle-sagrado-cusco",
-        title: "Valle Sagrado y Ollantaytambo",
-        duration: "1 Día",
-        location: "Cusco",
-        price: "120",
-        image:
-          "https://images.unsplash.com/photo-1589802829985-817e51171b92?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Conoce Pisac, Maras, Moray y la fortaleza de Ollantaytambo en el corazón del Valle.",
-      },
-      {
-        id: "montana-7-colores",
-        title: "Montaña de 7 Colores (Vinicunca)",
-        duration: "1 Día",
-        location: "Cusco",
-        price: "85",
-        image:
-          "https://images.unsplash.com/photo-1580619305218-8423a7ef79b4?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Una caminata inolvidable hacia una de las maravillas naturales más impresionantes.",
-      },
-      {
-        id: "laguna-humantay",
-        title: "Trekking a la Laguna Humantay",
-        duration: "1 Día",
-        location: "Cusco",
-        price: "90",
-        image:
-          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Embárcate en un trekking mágico hacia aguas turquesas rodeadas de nevados.",
-      },
-      {
-        id: "camino-inca-4d3n",
-        title: "Camino Inca Ancestral (4D/3N)",
-        duration: "4 Días",
-        location: "Cusco",
-        price: "650",
-        image:
-          "https://images.unsplash.com/photo-1568632234137-a2327eb2d847?q=80&w=800&auto=format&fit=crop",
-        description:
-          "La ruta de senderismo más icónica ingresando por la Inti Punku a Machu Picchu.",
-      },
-      {
-        id: "oasis-huacachina-ica",
-        title: "Oasis de Huacachina y Nazca",
-        duration: "2 Días",
-        location: "Ica",
-        price: "210",
-        image:
-          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Adrenalina en buggies por las dunas de Ica y sobrevuelo por las Líneas de Nazca.",
-      },
-    ],
-  },
-  en: {
-    sectionBadge: "TOP EXPERIENCES",
-    sectionTitle: "POPULAR TOURS IN PERU",
-    sectionSubtitle:
-      "Handpicked journeys with expert local guides and tailored all-inclusive services.",
-    btnText: "Book Now",
-    fromPrice: "From",
-    tours: [
-      {
-        id: "machu-picchu-full-day",
-        title: "Classic Machu Picchu Full Day",
-        duration: "1 Day",
-        location: "Cusco",
-        price: "280",
-        image:
-          "https://images.unsplash.com/photo-1526392060635-9d6019884377?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Explore the majestic Inca citadel of Machu Picchu with a private guide and panoramic train.",
-      },
-      {
-        id: "valle-sagrado-cusco",
-        title: "Sacred Valley & Ollantaytambo",
-        duration: "1 Day",
-        location: "Cusco",
-        price: "120",
-        image:
-          "https://images.unsplash.com/photo-1589802829985-817e51171b92?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Discover Pisac, Maras, Moray, and the ancient fortress of Ollantaytambo.",
-      },
-      {
-        id: "montana-7-colores",
-        title: "Rainbow Mountain Trek",
-        duration: "1 Day",
-        location: "Cusco",
-        price: "85",
-        image:
-          "https://images.unsplash.com/photo-1580619305218-8423a7ef79b4?q=80&w=800&auto=format&fit=crop",
-        description:
-          "An unforgettable hike to one of the most stunning natural wonders of the Andes.",
-      },
-      {
-        id: "laguna-humantay",
-        title: "Humantay Lake Trekking",
-        duration: "1 Day",
-        location: "Cusco",
-        price: "90",
-        image:
-          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Embark on a scenic hike to turquoise waters surrounded by majestic glacier mountains.",
-      },
-      {
-        id: "camino-inca-4d3n",
-        title: "Classic Inca Trail (4D/3N)",
-        duration: "4 Days",
-        location: "Cusco",
-        price: "650",
-        image:
-          "https://images.unsplash.com/photo-1568632234137-a2327eb2d847?q=80&w=800&auto=format&fit=crop",
-        description:
-          "South America's most legendary trekking route entering through the Sun Gate.",
-      },
-      {
-        id: "oasis-huacachina-ica",
-        title: "Huacachina Oasis & Nazca",
-        duration: "2 Days",
-        location: "Ica",
-        price: "210",
-        image:
-          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Dune buggy adrenaline in the Ica desert and flight over the mysterious Nazca Lines.",
-      },
-    ],
-  },
-  pt: {
-    sectionBadge: "EXPERIÊNCIAS TOP",
-    sectionTitle: "PASSEIOS POPULARES NO PERU",
-    sectionSubtitle:
-      "Viagens selecionadas com guias locais especialistas e serviço personalizado.",
-    btnText: "Reservar",
-    fromPrice: "A partir de",
-    tours: [
-      {
-        id: "machu-picchu-full-day",
-        title: "Machu Picchu Clássico Full Day",
-        duration: "1 Dia",
-        location: "Cusco",
-        price: "280",
-        image:
-          "https://images.unsplash.com/photo-1526392060635-9d6019884377?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Conheça a majestosa cidadela inca com guia privativo e trem panorâmico.",
-      },
-      {
-        id: "valle-sagrado-cusco",
-        title: "Vale Sagrado e Ollantaytambo",
-        duration: "1 Dia",
-        location: "Cusco",
-        price: "120",
-        image:
-          "https://images.unsplash.com/photo-1589802829985-817e51171b92?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Visite Pisac, Maras, Moray e a fortaleza de Ollantaytambo no Vale Sagrado.",
-      },
-      {
-        id: "montana-7-colores",
-        title: "Montanha das 7 Cores",
-        duration: "1 Dia",
-        location: "Cusco",
-        price: "85",
-        image:
-          "https://images.unsplash.com/photo-1580619305218-8423a7ef79b4?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Uma caminhada inesquecível rumo a uma das maravilhas naturais dos Andes.",
-      },
-      {
-        id: "laguna-humantay",
-        title: "Trekking à Laguna Humantay",
-        duration: "1 Dia",
-        location: "Cusco",
-        price: "90",
-        image:
-          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Embarque em uma caminhada mágica até águas turquesas cercadas por montanhas.",
-      },
-      {
-        id: "camino-inca-4d3n",
-        title: "Trilha Inca Clássica (4D/3N)",
-        duration: "4 Dias",
-        location: "Cusco",
-        price: "650",
-        image:
-          "https://images.unsplash.com/photo-1568632234137-a2327eb2d847?q=80&w=800&auto=format&fit=crop",
-        description:
-          "A rota de caminhada mais famosa da América do Sul entrando pela Porta do Sol.",
-      },
-      {
-        id: "oasis-huacachina-ica",
-        title: "Oásis de Huacachina e Nazca",
-        duration: "2 Dias",
-        location: "Ica",
-        price: "210",
-        image:
-          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop",
-        description:
-          "Adrenalina em buggies nas dunas de Ica e sobrevoo pelas Linhas de Nazca.",
-      },
-    ],
-  },
-};
+const t = getTranslations(currentLang);
 
-const t = translations[currentLang] || translations.es;
+const allTours = await getCollection("tours");
+const tours = allTours
+  .filter((tour) => tour.id.startsWith(`${currentLang}/`))
+  .map((tour) => ({
+    id: tour.id.replace(/^[^/]+\//, ""),
+    title: tour.data.title,
+    duration: tour.data.duration,
+    location: tour.data.destination,
+    price: String(tour.data.price),
+    image: tour.data.image,
+    description: tour.data.description,
+  }));
 ---
 
 <section
@@ -248,17 +34,19 @@ const t = translations[currentLang] || translations.es;
           class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface border border-border text-primary font-heading text-xs sm:text-sm tracking-[2px]"
         >
           <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-          <span class="text-white font-semibold">{t.sectionBadge}</span>
+          <span class="text-white font-semibold"
+            >{t["popularTours.sectionBadge"]}</span
+          >
         </div>
         <h2
           class="font-heading text-2xl sm:text-5xl lg:text-6xl text-white tracking-wider uppercase leading-tight font-bold"
         >
-          {t.sectionTitle}
+          {t["popularTours.sectionTitle"]}
         </h2>
         <p
           class="font-body text-white/90 text-sm sm:text-lg font-normal leading-relaxed"
         >
-          {t.sectionSubtitle}
+          {t["popularTours.sectionSubtitle"]}
         </p>
       </div>
 
@@ -313,113 +101,19 @@ const t = translations[currentLang] || translations.es;
       style="scrollbar-width: none; -ms-overflow-style: none;"
     >
       {
-        t.tours.map((tour: any) => (
-          <article class="flex-none w-[82%] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)] snap-center sm:snap-start group cursor-pointer">
-            {/* CARD TIPO EDITORIAL CON ALTO MÓVIL ADAPTATIVO */}
-            <div class="relative w-full h-[400px] sm:h-[460px] rounded-2xl overflow-hidden border border-border/80 hover:border-primary/80 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 flex flex-col justify-between p-4 sm:p-6 bg-card">
-              {/* 1. IMAGEN DE FONDO */}
-              <div class="absolute inset-0 z-0">
-                <img
-                  src={tour.image}
-                  alt={tour.title}
-                  loading="lazy"
-                  class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/30 group-hover:via-black/60 transition-colors" />
-              </div>
-
-              {/* 2. ETIQUETAS SUPERIORES */}
-              <div class="relative z-10 flex items-center justify-between gap-1.5">
-                <span class="px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white font-body text-xs sm:text-sm font-semibold flex items-center gap-1.5 shadow-md">
-                  <svg
-                    class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                  {tour.location}
-                </span>
-
-                <span class="px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white font-body text-xs sm:text-sm font-semibold flex items-center gap-1.5 shadow-md">
-                  <svg
-                    class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  {tour.duration}
-                </span>
-              </div>
-
-              {/* 3. CONTENIDO INFERIOR */}
-              <div class="relative z-10 space-y-2.5 sm:space-y-3.5 pt-4">
-                <h3 class="font-heading text-lg sm:text-2xl text-white font-semibold tracking-wide leading-tight group-hover:text-primary transition-colors line-clamp-2 drop-shadow-md">
-                  {tour.title}
-                </h3>
-
-                <p class="font-body text-xs sm:text-sm text-white/95 line-clamp-2 leading-relaxed font-normal drop-shadow-sm">
-                  {tour.description}
-                </p>
-
-                {/* PRECIO Y BOTÓN */}
-                <div class="pt-3 border-t border-white/25 flex items-center justify-between">
-                  <div>
-                    <span class="block text-[10px] sm:text-xs font-body text-white/80 uppercase tracking-wider font-medium">
-                      {t.fromPrice}
-                    </span>
-                    <div class="flex items-baseline gap-1">
-                      <span class="font-heading text-xl sm:text-3xl text-primary font-bold tracking-tight">
-                        ${tour.price}
-                      </span>
-                      <span class="text-[10px] sm:text-xs text-white/90 font-medium">
-                        USD
-                      </span>
-                    </div>
-                  </div>
-
-                  <a
-                    href={`/${currentLang}/tours/${tour.id}`}
-                    class="bg-primary hover:bg-primary/90 text-primary-foreground font-heading text-xs sm:text-sm font-bold tracking-wider px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl transition-all duration-300 transform group-hover:-translate-y-0.5 shadow-md shadow-primary/30 flex items-center gap-1.5"
-                  >
-                    <span>{t.btnText}</span>
-                    <svg
-                      class="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-200 group-hover:translate-x-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2.5"
-                        d="M14 5l7 7m0 0l-7 7m7-7H3"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </article>
+        tours.map((tour) => (
+          <TourCard
+            id={tour.id}
+            title={tour.title}
+            duration={tour.duration}
+            location={tour.location}
+            price={tour.price}
+            image={tour.image}
+            description={tour.description}
+            href={`/${currentLang}/tours/${tour.id}`}
+            fromPrice={t["popularTours.fromPrice"]}
+            btnText={t["popularTours.btnText"]}
+          />
         ))
       }
     </div>
@@ -430,7 +124,7 @@ const t = translations[currentLang] || translations.es;
       class="flex sm:hidden items-center justify-center gap-2 mt-6"
     >
       {
-        t.tours.map((_: any, index: number) => (
+        tours.map((_: any, index: number) => (
           <span
             data-index={index}
             class="dot-indicator w-2.5 h-2.5 rounded-full bg-white/30 transition-all duration-300"

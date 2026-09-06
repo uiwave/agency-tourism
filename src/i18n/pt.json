@@ -15,5 +15,16 @@
   "header.reservations": "RESERVAS",
   "header.address": "Av. El Sol 123, Cusco - Perú",
   "header.hours": "Seg - Sáb: 8:00 AM - 8:00 PM",
-  "header.menuTitle": "MENU"
+  "header.menuTitle": "MENU",
+  "popularTours.sectionBadge": "EXPERIÊNCIAS TOP",
+  "popularTours.sectionTitle": "PASSEIOS POPULARES NO PERU",
+  "popularTours.sectionSubtitle": "Viagens selecionadas com guias locais especialistas e serviço personalizado.",
+  "popularTours.btnText": "Reservar",
+  "popularTours.fromPrice": "A partir de",
+  "destinations.badge": "DESTINOS POPULARES",
+  "destinations.title": "Os cantos mais espetaculares do Brasil",
+  "destinations.description": "Selecione seu próximo destino e descubra itinerários projetados para vivenciar experiências inesquecíveis.",
+  "destinations.exploreText": "Explorar passeios",
+  "destinations.recommendedText": "Recomendado:",
+  "destinations.popularText": "Popular"
 }

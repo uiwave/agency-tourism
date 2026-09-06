@@ -4,6 +4,8 @@ destination: Cusco
 duration: Full Day
 type: Cultural
 price: 300
+image: "https://images.unsplash.com/photo-1526392060635-9d6019884377?q=80&w=800&auto=format&fit=crop"
+description: "Recorre la majestuosa ciudadela inca de Machu Picchu con guía privado y tren panorámico."
 ---
 
 # Machu Picchu

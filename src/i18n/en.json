@@ -15,5 +15,16 @@
   "header.reservations": "BOOKINGS",
   "header.address": "123 El Sol Ave, Cusco - Peru",
   "header.hours": "Mon - Sat: 8:00 AM - 8:00 PM",
-  "header.menuTitle": "MENU"
+  "header.menuTitle": "MENU",
+  "popularTours.sectionBadge": "TOP EXPERIENCES",
+  "popularTours.sectionTitle": "POPULAR TOURS IN PERU",
+  "popularTours.sectionSubtitle": "Handpicked journeys with expert local guides and tailored all-inclusive services.",
+  "popularTours.btnText": "Book Now",
+  "popularTours.fromPrice": "From",
+  "destinations.badge": "TOP DESTINATIONS",
+  "destinations.title": "The most spectacular corners of Brazil",
+  "destinations.description": "Choose your next destination and discover itineraries designed for unforgettable experiences.",
+  "destinations.exploreText": "Explore tours",
+  "destinations.recommendedText": "Recommended:",
+  "destinations.popularText": "Popular"
 }

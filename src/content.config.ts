@@ -17,6 +17,8 @@ const tours = defineCollection({
     duration: z.string(),
     type: z.string(),
     price: z.number().positive(),
+    image: z.string(),
+    description: z.string(),
   }),
 });
 
