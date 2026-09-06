@@ -1,0 +1,43 @@
+---
+interface Props {
+  badge?: string;
+  title: string;
+  subtitle?: string;
+  centered?: boolean;
+  as?: "h1" | "h2";
+  shadow?: boolean;
+  class?: string;
+}
+
+const {
+  badge,
+  title,
+  subtitle,
+  centered = true,
+  as: Tag = "h2",
+  shadow = false,
+  class: className = "",
+} = Astro.props;
+---
+
+<div class:list={[centered ? "text-center max-w-3xl mx-auto" : "", "space-y-4", className]}>
+  {badge && (
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-border text-primary font-heading text-xs sm:text-sm tracking-[2px]">
+      <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+      <span class="text-white font-semibold">{badge}</span>
+    </div>
+  )}
+
+  <Tag class:list={[
+    "font-heading text-3xl sm:text-4xl lg:text-5xl text-white tracking-wider uppercase leading-tight font-bold",
+    shadow && "drop-shadow-lg",
+  ]}>
+    {title}
+  </Tag>
+
+  {subtitle && (
+    <p class="font-body text-white/70 text-base sm:text-lg leading-relaxed">
+      {subtitle}
+    </p>
+  )}
+</div>

@@ -2,6 +2,7 @@
 import { getTranslations } from "@/i18n";
 import { getCollection } from "astro:content";
 import TourCard from "@/components/TourCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
 
 const currentLang = Astro.currentLocale || "es";
 
@@ -29,26 +30,13 @@ const tours = allTours
     <div
       class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-5"
     >
-      <div class="space-y-2.5 max-w-2xl">
-        <div
-          class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface border border-border text-primary font-heading text-xs sm:text-sm tracking-[2px]"
-        >
-          <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-          <span class="text-white font-semibold"
-            >{t["popularTours.sectionBadge"]}</span
-          >
-        </div>
-        <h2
-          class="font-heading text-2xl sm:text-5xl lg:text-6xl text-white tracking-wider uppercase leading-tight font-bold"
-        >
-          {t["popularTours.sectionTitle"]}
-        </h2>
-        <p
-          class="font-body text-white/90 text-sm sm:text-lg font-normal leading-relaxed"
-        >
-          {t["popularTours.sectionSubtitle"]}
-        </p>
-      </div>
+      <SectionHeading
+        badge={t["popularTours.sectionBadge"]}
+        title={t["popularTours.sectionTitle"]}
+        subtitle={t["popularTours.sectionSubtitle"]}
+        centered={false}
+        class="!space-y-2.5 max-w-2xl"
+      />
 
       {
         /* CONTROLES DE NAVEGACIÓN (OCULTOS EN MÓVIL PEQUEÑO, VISIBLES DESDE SM) */

@@ -1,5 +1,6 @@
 ---
 import { getTranslations } from "@/i18n";
+import SectionHeading from "@/components/SectionHeading.astro";
 
 const currentLang = Astro.currentLocale || "es";
 
@@ -12,16 +13,13 @@ const t = getTranslations(currentLang);
 
       <!-- COLUMNA IZQUIERDA: Contenido -->
       <div class="space-y-8">
-        <!-- Badge -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-border text-primary font-heading text-xs sm:text-sm tracking-[2px]">
-          <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-          <span class="text-white font-semibold">{t["about.badge"]}</span>
-        </div>
-
-        <!-- Título -->
-        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-white tracking-wider uppercase leading-tight font-bold">
-          {t["about.title"]}
-        </h2>
+        <SectionHeading
+          badge={t["about.badge"]}
+          title={t["about.title"]}
+          subtitle={t["about.description"]}
+          centered={false}
+          class="!space-y-4"
+        />
 
         <!-- Descripción -->
         <p class="font-body text-white/70 text-base sm:text-lg leading-relaxed">

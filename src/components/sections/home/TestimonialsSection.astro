@@ -1,6 +1,7 @@
 ---
 import { getTranslations } from "@/i18n";
 import { testimonials } from "@/data/testimonials";
+import SectionHeading from "@/components/SectionHeading.astro";
 
 const currentLang = Astro.currentLocale || "es";
 
@@ -11,15 +12,10 @@ const t = getTranslations(currentLang);
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
 
     <!-- ENCABEZADO -->
-    <div class="text-center max-w-3xl mx-auto space-y-4">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-border text-primary font-heading text-xs sm:text-sm tracking-[2px]">
-        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-        <span class="text-white font-semibold">{t["testimonials.badge"]}</span>
-      </div>
-      <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-white tracking-wider uppercase leading-tight font-bold">
-        {t["testimonials.title"]}
-      </h2>
-    </div>
+    <SectionHeading
+      badge={t["testimonials.badge"]}
+      title={t["testimonials.title"]}
+    />
 
     <!-- CARRUSEL INFINITO -->
     <div class="relative">
