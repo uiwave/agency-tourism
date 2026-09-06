@@ -1,5 +1,16 @@
 {
   "hero.title": "Descobre o Peru",
   "hero.subtitle": "Expedições inesquecíveis aos destinos mais icônicos da América do Sul",
-  "hero.cta": "Ver Tours"
+  "hero.cta": "Ver Tours",
+  "header.destinations": "Destinos",
+  "header.cusco": "Cusco",
+  "header.arequipa": "Arequipa",
+  "header.puno": "Puno",
+  "header.ica": "Ica",
+  "header.about": "Sobre Nós",
+  "header.contact": "Contato",
+  "header.reservations": "RESERVAS",
+  "header.address": "Av. El Sol 123, Cusco - Perú",
+  "header.hours": "Seg - Sáb: 8:00 AM - 8:00 PM",
+  "header.menuTitle": "MENU"
 }

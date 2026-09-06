@@ -5,5 +5,16 @@
   "blogCta.title": "Explora Nuestro Blog",
   "blogCta.subtitle": "Descubre Perú a Fondo",
   "blogCta.description": "Sumérgete en nuestros artículos y descubre lo mejor de Perú. Consejos de viaje, historias fascinantes y guías prácticas para inspirar tus próximas aventuras.",
-  "blogCta.button": "Ver Artículos"
+  "blogCta.button": "Ver Artículos",
+  "header.destinations": "Destinos",
+  "header.cusco": "Cusco",
+  "header.arequipa": "Arequipa",
+  "header.puno": "Puno",
+  "header.ica": "Ica",
+  "header.about": "Sobre Nosotros",
+  "header.contact": "Contáctanos",
+  "header.reservations": "RESERVAS",
+  "header.address": "Av. El Sol 123, Cusco - Perú",
+  "header.hours": "Lun - Sáb: 8:00 AM - 8:00 PM",
+  "header.menuTitle": "MENÚ"
 }

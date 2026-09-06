@@ -1,53 +1,11 @@
 ---
-import LanguageSelector from "./LanguageSelector.astro";
 import Menu from "@/assets/icons/menu.svg";
 import Attend from "@/assets/icons/attend.svg";
+import { getTranslations } from "@/i18n";
 
 const currentLang = Astro.currentLocale || "es";
 
-const translations: Record<string, any> = {
-  es: {
-    destinations: "Destinos",
-    cusco: "Cusco",
-    arequipa: "Arequipa",
-    puno: "Puno",
-    ica: "Ica",
-    about: "Sobre Nosotros",
-    contact: "Contáctanos",
-    reservations: "RESERVAS",
-    address: "Av. El Sol 123, Cusco - Perú",
-    hours: "Lun - Sáb: 8:00 AM - 8:00 PM",
-    menuTitle: "MENÚ",
-  },
-  en: {
-    destinations: "Destinations",
-    cusco: "Cusco",
-    arequipa: "Arequipa",
-    puno: "Puno",
-    ica: "Ica",
-    about: "About Us",
-    contact: "Contact Us",
-    reservations: "BOOKINGS",
-    address: "123 El Sol Ave, Cusco - Peru",
-    hours: "Mon - Sat: 8:00 AM - 8:00 PM",
-    menuTitle: "MENU",
-  },
-  pt: {
-    destinations: "Destinos",
-    cusco: "Cusco",
-    arequipa: "Arequipa",
-    puno: "Puno",
-    ica: "Ica",
-    about: "Sobre Nós",
-    contact: "Contato",
-    reservations: "RESERVAS",
-    address: "Av. El Sol 123, Cusco - Perú",
-    hours: "Seg - Sáb: 8:00 AM - 8:00 PM",
-    menuTitle: "MENU",
-  },
-};
-
-const t = translations[currentLang] || translations.es;
+const t = getTranslations(currentLang);
 
 const languages = [
   { code: "es", label: "Español", flag: "🇪🇸", codeUpper: "ES" },
@@ -60,17 +18,17 @@ const currentLangData =
 
 const navItems = [
   {
-    label: t.destinations,
+    label: t["header.destinations"],
     href: `/${currentLang}/programs`,
     children: [
-      { label: t.cusco, href: `/${currentLang}/programs/cusco` },
-      { label: t.arequipa, href: `/${currentLang}/programs/arequipa` },
-      { label: t.puno, href: `/${currentLang}/programs/puno` },
-      { label: t.ica, href: `/${currentLang}/programs/ica` },
+      { label: t["header.cusco"], href: `/${currentLang}/programs/cusco` },
+      { label: t["header.arequipa"], href: `/${currentLang}/programs/arequipa` },
+      { label: t["header.puno"], href: `/${currentLang}/programs/puno` },
+      { label: t["header.ica"], href: `/${currentLang}/programs/ica` },
     ],
   },
-  { label: t.about, href: `/${currentLang}/pricing` },
-  { label: t.contact, href: `/${currentLang}/results` },
+  { label: t["header.about"], href: `/${currentLang}/pricing` },
+  { label: t["header.contact"], href: `/${currentLang}/results` },
 ];
 ---
 
@@ -109,7 +67,7 @@ const navItems = [
                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
             </svg>
             <span class="hover:text-primary transition-colors cursor-default"
-              >{t.address}</span
+              >{t["header.address"]}</span
             >
           </div>
 
@@ -129,7 +87,7 @@ const navItems = [
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <span class="hover:text-primary transition-colors cursor-default"
-              >{t.hours}</span
+              >{t["header.hours"]}</span
             >
           </div>
         </div>
@@ -145,7 +103,7 @@ const navItems = [
               <Attend />
             </div>
             <span class="font-semibold tracking-wider"
-              >{t.reservations}: <a
+              >{t["header.reservations"]}: <a
                 href="tel:+51123456789"
                 class="hover:text-primary transition-colors">+51 123 456 789</a
               ></span
@@ -295,7 +253,7 @@ const navItems = [
     {/* CABECERA DRAWER */}
     <div class="flex items-center justify-between p-6 border-b border-white/10">
       <span class="text-white font-heading tracking-[2px] text-lg font-semibold"
-        >{t.menuTitle}</span
+        >{t["header.menuTitle"]}</span
       >
       <button
         id="close-menu-btn"
@@ -390,13 +348,13 @@ const navItems = [
           stroke-width="2"
           d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
       </svg>
-      <span>{t.address}</span>
+      <span>{t["header.address"]}</span>
     </div>
     <div class="flex items-center gap-2">
       <div class="text-primary scale-75 shrink-0">
         <Attend />
       </div>
-      <span class="font-semibold">{t.reservations}: +51 123 456 789</span>
+      <span class="font-semibold">{t["header.reservations"]}: +51 123 456 789</span>
     </div>
   </div>
 </aside>

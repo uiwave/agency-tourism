@@ -1,5 +1,16 @@
 {
   "hero.title": "Discover Peru",
   "hero.subtitle": "Unforgettable expeditions to South America's most iconic destinations",
-  "hero.cta": "View Tours"
+  "hero.cta": "View Tours",
+  "header.destinations": "Destinations",
+  "header.cusco": "Cusco",
+  "header.arequipa": "Arequipa",
+  "header.puno": "Puno",
+  "header.ica": "Ica",
+  "header.about": "About Us",
+  "header.contact": "Contact Us",
+  "header.reservations": "BOOKINGS",
+  "header.address": "123 El Sol Ave, Cusco - Peru",
+  "header.hours": "Mon - Sat: 8:00 AM - 8:00 PM",
+  "header.menuTitle": "MENU"
 }
