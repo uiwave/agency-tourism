@@ -6,3 +6,11 @@
   @apply font-heading leading-[0.95];
   font-size: clamp(1.563rem, -0.893rem + 6.138vw, 5rem);
 }
+
+@utility uw-container {
+  @apply container mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+@utility uw-section {
+  @apply py-12 sm:py-20;
+}

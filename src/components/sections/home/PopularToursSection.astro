@@ -22,11 +22,8 @@ const tours = allTours
   }));
 ---
 
-<section
-  class="w-full py-12 sm:py-20 bg-background text-foreground overflow-hidden"
->
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    {/* CABECERA */}
+<section class="w-full overflow-hidden">
+  <div class="uw-container uw-section">
     <div
       class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-5"
     >
@@ -35,13 +32,13 @@ const tours = allTours
         title={t["popularTours.sectionTitle"]}
         subtitle={t["popularTours.sectionSubtitle"]}
         centered={false}
-        class="!space-y-2.5 max-w-2xl"
+        class="space-y-2.5! max-w-2xl"
       />
 
       {
         /* CONTROLES DE NAVEGACIÓN (OCULTOS EN MÓVIL PEQUEÑO, VISIBLES DESDE SM) */
       }
-      <div class="hidden sm:flex items-center gap-3 self-end md:self-auto">
+      <div class="hidden items-center gap-3 self-end md:self-auto">
         <button
           id="prevBtn"
           aria-label="Anterior"
@@ -107,10 +104,7 @@ const tours = allTours
     </div>
 
     {/* INDICADOR DE PUNTOS PARA NAVEGACIÓN EN MÓVIL (DOTS) */}
-    <div
-      id="carouselDots"
-      class="flex sm:hidden items-center justify-center gap-2 mt-6"
-    >
+    <div id="carouselDots" class="flex items-center justify-center gap-2 mt-6">
       {
         tours.map((_: any, index: number) => (
           <span
