@@ -36,12 +36,8 @@ const t = getTranslations(currentLang);
     {/* Aumentado a max-w-6xl para dar amplitud horizontal */}
     <div class="space-y-5 sm:space-y-6">
       {/* BADGE ELEGANTE */}
-      <div
-        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/50 border border-white/20 backdrop-blur-md text-primary font-heading text-xs sm:text-sm tracking-[2px] shadow-lg"
-      >
-        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-        <span class="text-white">{t["hero.badge"]}</span>
-      </div>
+      <span class="font-decoration text-primary text-[clamp(1rem,0.643rem+0.893vw,1.5rem)] tracking-[4px]">{t["hero.badge"]}</span>
+      
 
       {/* TÍTULO IMPACTANTE CON ALTURA DE LÍNEA AJUSTADA */}
       <h1
@@ -50,14 +46,6 @@ const t = getTranslations(currentLang);
         class="font-heading text-[clamp(4.688rem,-9.821rem+36.272vw,25rem)] leading-none text-white"
       >
       </h1>
-      <!-- <h1
-        class="font-heading text-5xl sm:text-7xl md:text-8xl lg:text-[96px] text-white leading-[0.88] uppercase drop-shadow-[0_4px_25px_rgba(0,0,0,0.9)]"
-      >
-        <span class="block text-white/95">{t["hero.titleLine1"]}</span>
-        <span class="block text-primary">
-          {t["hero.titleLine2"]}
-        </span>
-      </h1> -->
     </div>
   </div>
 </section>
