@@ -24,65 +24,21 @@ const tours = allTours
 
 <section class="w-full overflow-hidden">
   <div class="uw-container uw-section">
-    <div
-      class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-5"
-    >
-      <SectionHeading
-        badge={t["popularTours.sectionBadge"]}
-        title={t["popularTours.sectionTitle"]}
-        subtitle={t["popularTours.sectionSubtitle"]}
-        centered={false}
-        class="space-y-2.5! max-w-2xl"
-      />
-
-      {
-        /* CONTROLES DE NAVEGACIÓN (OCULTOS EN MÓVIL PEQUEÑO, VISIBLES DESDE SM) */
-      }
-      <div class="hidden items-center gap-3 self-end md:self-auto">
-        <button
-          id="prevBtn"
-          aria-label="Anterior"
-          class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-surface/80 hover:bg-card border border-border hover:border-primary text-white flex items-center justify-center transition-all duration-200 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-md backdrop-blur-md"
-        >
-          <svg
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2.5"
-              d="M15 19l-7-7 7-7"></path>
-          </svg>
-        </button>
-
-        <button
-          id="nextBtn"
-          aria-label="Siguiente"
-          class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center transition-all duration-200 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-lg shadow-primary/30"
-        >
-          <svg
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2.5"
-              d="M9 5l7 7-7 7"></path>
-          </svg>
-        </button>
+    <div class="mb-8 sm:mb-12">
+      <div>
+        <h2 class="uw-heading-sm text-white">
+          {t["popularTours.sectionTitle"]}
+        </h2>
+        <p class="font-body text-white/70 text-base sm:text-lg leading-relaxed">
+          {t["popularTours.sectionSubtitle"]}
+        </p>
       </div>
     </div>
 
-    {/* CARRUSEL OPTIMIZADO PARA MÓVIL Y DESKTOP */}
+    {/* CARRUSEL GRID RESPONSIVE */}
     <div
       id="toursCarousel"
-      class="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-none scroll-smooth snap-x snap-mandatory py-2 -mx-4 px-4 sm:mx-0 sm:px-0"
+      class="grid grid-flow-col auto-cols-[100%] sm:auto-cols-[calc(50%-12px)] md:auto-cols-[calc(33.333%-16px)] lg:auto-cols-[calc(25%-18px)] gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory py-2 -mx-4 px-4 sm:mx-0 sm:px-0"
       style="scrollbar-width: none; -ms-overflow-style: none;"
     >
       {
@@ -103,7 +59,7 @@ const tours = allTours
       }
     </div>
 
-    {/* INDICADOR DE PUNTOS PARA NAVEGACIÓN EN MÓVIL (DOTS) */}
+    {/* INDICADOR DE PUNTOS */}
     <div id="carouselDots" class="flex items-center justify-center gap-2 mt-6">
       {
         tours.map((_: any, index: number) => (
@@ -132,60 +88,48 @@ const tours = allTours
     const carousel = document.getElementById(
       "toursCarousel",
     ) as HTMLElement | null;
-    const prevBtn = document.getElementById(
-      "prevBtn",
-    ) as HTMLButtonElement | null;
-    const nextBtn = document.getElementById(
-      "nextBtn",
-    ) as HTMLButtonElement | null;
     const dots = document.querySelectorAll(".dot-indicator");
+    if (!carousel || dots.length === 0) return;
 
-    if (!carousel) return;
-
-    const getScrollAmount = () => {
-      const firstCard = carousel.querySelector("article");
-      if (!firstCard) return 300;
-      const gap = window.innerWidth < 640 ? 16 : 24;
-      return firstCard.clientWidth + gap;
+    const getVisibleCount = () => {
+      const w = window.innerWidth;
+      if (w >= 1024) return 4;
+      if (w >= 768) return 3;
+      if (w >= 640) return 2;
+      return 1;
     };
 
-    if (nextBtn) {
-      nextBtn.addEventListener("click", () => {
-        carousel.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+    const updateDots = () => {
+      const visibleCount = getVisibleCount();
+      const totalItems = carousel.querySelectorAll("article").length;
+      const maxIndex = Math.max(totalItems - visibleCount, 0);
+      const cardWidth = carousel.scrollWidth / totalItems;
+      const activeIndex = Math.min(
+        Math.round(carousel.scrollLeft / cardWidth),
+        maxIndex,
+      );
+
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle("active", idx === activeIndex);
       });
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener("click", () => {
-        carousel.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
-      });
-    }
-
-    const updateCarouselState = () => {
-      // 1. Deshabilitar botones de flecha cuando corresponde
-      if (prevBtn && nextBtn) {
-        const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth - 5;
-        prevBtn.disabled = carousel.scrollLeft <= 5;
-        nextBtn.disabled = carousel.scrollLeft >= maxScrollLeft;
-      }
-
-      // 2. Actualizar puntos (dots) de navegación en pantallas móviles
-      if (dots.length > 0) {
-        const cardWidth = getScrollAmount();
-        const activeIndex = Math.round(carousel.scrollLeft / cardWidth);
-
-        dots.forEach((dot, idx) => {
-          if (idx === activeIndex) {
-            dot.classList.add("active");
-          } else {
-            dot.classList.remove("active");
-          }
-        });
-      }
     };
 
-    carousel.addEventListener("scroll", updateCarouselState);
-    window.addEventListener("resize", updateCarouselState);
-    updateCarouselState();
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const index = parseInt(dot.getAttribute("data-index") || "0");
+        const cards = carousel.querySelectorAll("article");
+        if (cards[index]) {
+          cards[index].scrollIntoView({
+            behavior: "smooth",
+            inline: "start",
+            block: "nearest",
+          });
+        }
+      });
+    });
+
+    carousel.addEventListener("scroll", updateDots);
+    window.addEventListener("resize", updateDots);
+    updateDots();
   });
 </script>
