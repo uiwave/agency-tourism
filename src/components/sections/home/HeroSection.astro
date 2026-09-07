@@ -15,7 +15,7 @@ const t = getTranslations(currentLang);
       loop
       muted
       playsinline
-      class="w-full h-full object-cover scale-105"
+      class="w-full h-full object-cover"
     >
       <source src="/videos/chull-banner.mp4" type="video/mp4" />
       Tu navegador no soporta el formato de video.
@@ -29,17 +29,14 @@ const t = getTranslations(currentLang);
     class="absolute bottom-0 left-0 w-full z-10 pointer-events-none"
   />
 
-  {/* 2. CONTENIDO PRINCIPAL */}
   <div
-    class="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 pt-16 text-center"
+    class="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 text-center pt-30"
   >
-    {/* Aumentado a max-w-6xl para dar amplitud horizontal */}
-    <div class="space-y-5 sm:space-y-6">
-      {/* BADGE ELEGANTE */}
-      <span class="font-decoration text-primary text-[clamp(1rem,0.643rem+0.893vw,1.5rem)] tracking-[4px]">{t["hero.badge"]}</span>
-      
-
-      {/* TÍTULO IMPACTANTE CON ALTURA DE LÍNEA AJUSTADA */}
+    <div>
+      <span
+        class="font-decoration text-primary text-[clamp(1rem,0.643rem+0.893vw,1.5rem)] tracking-[4px]"
+        >{t["hero.badge"]}</span
+      >
       <h1
         id="hero-title"
         data-text={t["hero.title"]}
