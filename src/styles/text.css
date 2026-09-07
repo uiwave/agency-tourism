@@ -1,3 +1,8 @@
 @utility uw-heading {
   @apply text-[clamp(0.9375rem,calc(0.85rem+0.35vw),1.125rem)] leading-6.5 font-heading tracking-[2px];
 }
+
+@utility uw-heading-sm {
+  @apply font-heading leading-[0.95];
+  font-size: clamp(1.563rem, -0.893rem + 6.138vw, 5rem);
+}
