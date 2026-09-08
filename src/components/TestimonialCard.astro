@@ -17,7 +17,7 @@ const { testimonial } = Astro.props;
 ---
 
 <article
-  class="w-full snap-center px-5 sm:px-6 lg:px-8 py-5 sm:py-6 rounded-3xl bg-card flex flex-col justify-between min-h-60 relative overflow-hidden border border-border/60 hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/10"
+  class="w-full h-full snap-center px-5 sm:px-6 lg:px-8 py-5 sm:py-6 rounded-2xl bg-card flex flex-col justify-between relative overflow-hidden border border-border/60 hover:border-primary/50 transition-all duration-500"
 >
   <div
     class="absolute -top-12 -left-12 w-64 h-48 bg-primary/40 rounded-full blur-2xl pointer-events-none"
@@ -36,7 +36,7 @@ const { testimonial } = Astro.props;
         ></path>
       </svg>
       <span
-        class="font-heading text-lg sm:text-xl lg:text-[clamp(1.75rem,1.571rem+0.446vw,2rem)] text-white"
+        class="font-heading text-[clamp(1.75rem,1.571rem+0.446vw,2rem)] text-white"
       >
         {testimonial.date}
       </span>
@@ -56,7 +56,7 @@ const { testimonial } = Astro.props;
       }
     </div>
 
-    <p class="text-sm sm:text-base leading-relaxed">
+    <p class="text-base leading-relaxed">
       {testimonial.text}
     </p>
   </div>
@@ -70,10 +70,10 @@ const { testimonial } = Astro.props;
       </span>
     </div>
     <div>
-      <p class="font-heading text-xl lg:text-2xl text-white">
+      <p class="font-heading text-2xl text-white">
         {testimonial.name}
       </p>
-      <p class="text-sm lg:text-base">
+      <p class="text-base">
         {testimonial.country} · {testimonial.tripType}
       </p>
     </div>

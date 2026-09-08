@@ -8,11 +8,7 @@ const duplicated = [...testimonials, ...testimonials];
 <section class="w-full overflow-hidden">
   <div class="uw-section">
     <div class="marquee-row w-full overflow-hidden relative">
-      <div
-        class="absolute left-0 top-0 h-full w-16 sm:w-20 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent"
-      >
-      </div>
-      <div class="marquee-inner flex min-w-[200%] py-2">
+      <div class="marquee-inner flex py-2">
         {
           duplicated.map((testimonial) => (
             <div class="w-72 sm:w-80 lg:w-90 shrink-0 px-2 sm:px-3">
@@ -21,10 +17,6 @@ const duplicated = [...testimonials, ...testimonials];
           ))
         }
       </div>
-      <div
-        class="absolute right-0 top-0 h-full w-16 sm:w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent"
-      >
-      </div>
     </div>
   </div>
 </section>
@@ -32,7 +24,7 @@ const duplicated = [...testimonials, ...testimonials];
 <style>
   @keyframes marqueeScroll {
     0% {
-      transform: translateX(0%);
+      transform: translateX(0);
     }
     100% {
       transform: translateX(-50%);
@@ -41,17 +33,18 @@ const duplicated = [...testimonials, ...testimonials];
 
   .marquee-inner {
     animation: marqueeScroll 30s linear infinite;
+    width: max-content;
   }
 
   @media (max-width: 639px) {
     .marquee-inner {
-      animation-duration: 5s;
+      animation-duration: 25s;
     }
   }
 
   @media (min-width: 640px) and (max-width: 1023px) {
     .marquee-inner {
-      animation-duration: 25s;
+      animation-duration: 28s;
     }
   }
 
