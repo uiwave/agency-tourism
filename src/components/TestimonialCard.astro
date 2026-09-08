@@ -17,19 +17,17 @@ const { testimonial } = Astro.props;
 ---
 
 <article
-  class="flex-none w-110 sm:w-140 px-8 py-6 rounded-3xl bg-card flex flex-col justify-between min-h-60 relative overflow-hidden"
+  class="w-full snap-center px-5 sm:px-6 lg:px-8 py-5 sm:py-6 rounded-3xl bg-card flex flex-col justify-between min-h-60 relative overflow-hidden border border-border/60 hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/10"
 >
-  {/* Bola de luminosidad contenida en la esquina superior izquierda */}
   <div
     class="absolute -top-12 -left-12 w-64 h-48 bg-primary/40 rounded-full blur-2xl pointer-events-none"
   >
   </div>
 
-  {/* Contenido en un contenedor z-10 para estar por encima del brillo */}
   <div class="relative z-10">
     <div class="flex items-center gap-3 mb-2">
       <svg
-        class="w-8 h-8 text-[#00a8cc] shrink-0"
+        class="w-7 h-7 lg:w-8 lg:h-8 text-[#00a8cc] shrink-0"
         fill="currentColor"
         viewBox="0 0 24 24"
       >
@@ -38,7 +36,7 @@ const { testimonial } = Astro.props;
         ></path>
       </svg>
       <span
-        class="font-heading text-[clamp(1.75rem,1.571rem+0.446vw,2rem)] text-white"
+        class="font-heading text-lg sm:text-xl lg:text-[clamp(1.75rem,1.571rem+0.446vw,2rem)] text-white"
       >
         {testimonial.date}
       </span>
@@ -58,26 +56,24 @@ const { testimonial } = Astro.props;
       }
     </div>
 
-    {/* Texto */}
-    <p class="text-base leading-relaxed">
+    <p class="text-sm sm:text-base leading-relaxed">
       {testimonial.text}
     </p>
   </div>
 
-  {/* Autor (Avatar con iniciales + Nombre + Info) */}
   <div class="mt-4 flex items-center gap-4 relative z-10">
     <div
-      class="w-12 h-12 rounded-full bg-[#00a8cc] text-white flex items-center justify-center shrink-0 shadow-sm"
+      class="w-11 h-11 lg:w-12 lg:h-12 rounded-full bg-[#00a8cc] text-white flex items-center justify-center shrink-0 shadow-sm"
     >
       <span class="font-heading text-sm font-bold">
         {testimonial.initials}
       </span>
     </div>
     <div>
-      <p class="font-heading text-2xl text-white">
+      <p class="font-heading text-xl lg:text-2xl text-white">
         {testimonial.name}
       </p>
-      <p class="text-base">
+      <p class="text-sm lg:text-base">
         {testimonial.country} · {testimonial.tripType}
       </p>
     </div>

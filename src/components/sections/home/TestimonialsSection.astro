@@ -1,43 +1,49 @@
 ---
-import { getTranslations } from "@/i18n";
 import { testimonials } from "@/data/testimonials";
-import SectionHeading from "@/components/SectionHeading.astro";
 import TestimonialCard from "@/components/TestimonialCard.astro";
 
-const currentLang = Astro.currentLocale || "es";
-
-const t = getTranslations(currentLang);
+const duplicated = [...testimonials, ...testimonials];
 ---
 
 <section class="w-full overflow-hidden">
   <div class="uw-section">
-    <div class="relative">
-      <div class="testimonials-track flex gap-6 w-max">
+    <div class="marquee-row w-full overflow-hidden relative">
+      <div
+        class="absolute left-0 top-0 h-full w-16 sm:w-20 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent"
+      >
+      </div>
+      <div class="marquee-inner flex min-w-[200%] py-2">
         {
-          [...testimonials, ...testimonials].map((testimonial) => (
-            <TestimonialCard testimonial={testimonial} />
+          duplicated.map((testimonial) => (
+            <div class="w-72 sm:w-80 lg:w-90 shrink-0 px-2 sm:px-3">
+              <TestimonialCard testimonial={testimonial} />
+            </div>
           ))
         }
+      </div>
+      <div
+        class="absolute right-0 top-0 h-full w-16 sm:w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent"
+      >
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  .testimonials-track {
-    animation: scroll-testimonials 60s linear infinite;
-  }
-
-  .testimonials-track:hover {
-    animation-play-state: paused;
-  }
-
-  @keyframes scroll-testimonials {
+  @keyframes marqueeScroll {
     0% {
-      transform: translateX(0);
+      transform: translateX(0%);
     }
     100% {
       transform: translateX(-50%);
     }
+  }
+
+  .marquee-inner {
+    animation: marqueeScroll 30s linear infinite;
+  }
+
+  .marquee-row:hover .marquee-inner {
+    animation-play-state: paused;
   }
 </style>
