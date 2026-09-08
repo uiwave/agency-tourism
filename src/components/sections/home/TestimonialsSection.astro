@@ -43,6 +43,18 @@ const duplicated = [...testimonials, ...testimonials];
     animation: marqueeScroll 30s linear infinite;
   }
 
+  @media (max-width: 639px) {
+    .marquee-inner {
+      animation-duration: 5s;
+    }
+  }
+
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .marquee-inner {
+      animation-duration: 25s;
+    }
+  }
+
   .marquee-row:hover .marquee-inner {
     animation-play-state: paused;
   }
