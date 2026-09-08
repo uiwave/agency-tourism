@@ -1,0 +1,85 @@
+---
+export interface Testimonial {
+  rating: number;
+  date: string;
+  text: string;
+  initials: string;
+  name: string;
+  country: string;
+  tripType: string;
+}
+
+interface Props {
+  testimonial: Testimonial;
+}
+
+const { testimonial } = Astro.props;
+---
+
+<article
+  class="flex-none w-110 sm:w-140 px-8 py-6 rounded-3xl bg-card flex flex-col justify-between min-h-60 relative overflow-hidden"
+>
+  {/* Bola de luminosidad contenida en la esquina superior izquierda */}
+  <div
+    class="absolute -top-12 -left-12 w-64 h-48 bg-primary/40 rounded-full blur-2xl pointer-events-none"
+  >
+  </div>
+
+  {/* Contenido en un contenedor z-10 para estar por encima del brillo */}
+  <div class="relative z-10">
+    <div class="flex items-center gap-3 mb-2">
+      <svg
+        class="w-8 h-8 text-[#00a8cc] shrink-0"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+        ></path>
+      </svg>
+      <span
+        class="font-heading text-[clamp(1.75rem,1.571rem+0.446vw,2rem)] text-white"
+      >
+        {testimonial.date}
+      </span>
+    </div>
+
+    <div class="flex items-center gap-1 mb-3">
+      {
+        [1, 2, 3, 4, 5].map((star) => (
+          <svg
+            class={`w-4 h-4 ${star <= testimonial.rating ? "text-[#ff7a38]" : "text-gray-300"}`}
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+        ))
+      }
+    </div>
+
+    {/* Texto */}
+    <p class="text-base leading-relaxed">
+      {testimonial.text}
+    </p>
+  </div>
+
+  {/* Autor (Avatar con iniciales + Nombre + Info) */}
+  <div class="mt-4 flex items-center gap-4 relative z-10">
+    <div
+      class="w-12 h-12 rounded-full bg-[#00a8cc] text-white flex items-center justify-center shrink-0 shadow-sm"
+    >
+      <span class="font-heading text-sm font-bold">
+        {testimonial.initials}
+      </span>
+    </div>
+    <div>
+      <p class="font-heading text-2xl text-white">
+        {testimonial.name}
+      </p>
+      <p class="text-base">
+        {testimonial.country} · {testimonial.tripType}
+      </p>
+    </div>
+  </div>
+</article>
