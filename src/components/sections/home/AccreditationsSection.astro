@@ -1,25 +1,33 @@
 ---
 const certifications = [
-  "/images/certifications/gerceturlogo.png",
-  "/images/certifications/perulogo.png",
-  "/images/certifications/promperulogo.png",
+  "/images/certifications/gercetur.png",
+  "/images/certifications/logo_peru.png",
+  "/images/certifications/logo_promperu.png",
   "/images/certifications/safetravelslogo.png",
   "/images/certifications/seguridadturisticalogo.png",
   "/images/certifications/TripAdvisor_Logo.svg.webp",
-  "/images/certifications/tripadvisorlogo.png",
 ];
 
 const doubledCerts = [...certifications, ...certifications];
 ---
 
-<section class="w-full py-12 sm:py-16 bg-surface/30 overflow-hidden">
-  <div class="w-full overflow-hidden">
-    <div class="flex items-center gap-12 w-max animate-[scroll-certs_30s_linear_infinite] hover:[animation-play-state:paused]">
-      {doubledCerts.map((src) => (
-        <div class="shrink-0 h-15 sm:h-18 lg:h-21">
-          <img src={src} alt="" loading="lazy" class="h-full w-auto object-contain" />
-        </div>
-      ))}
+<section class="w-fulloverflow-hidden">
+  <div class="w-full uw-section overflow-hidden">
+    <div
+      class="flex items-center gap-12 w-max animate-[scroll-certs_30s_linear_infinite] hover:[animation-play-state:paused]"
+    >
+      {
+        doubledCerts.map((src) => (
+          <div class="shrink-0 h-15 sm:h-18 lg:h-21">
+            <img
+              src={src}
+              alt=""
+              loading="lazy"
+              class="h-full w-auto object-contain"
+            />
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>

@@ -3,7 +3,6 @@ interface Props {
   title: string;
   subtitle?: string;
   centered?: boolean;
-  shadow?: boolean;
   class?: string;
 }
 
@@ -11,22 +10,20 @@ const {
   title,
   subtitle,
   centered = true,
-  shadow = false,
   class: className = "",
 } = Astro.props;
 ---
 
-<div class:list={[centered ? "text-center max-w-3xl mx-auto" : "", "space-y-4", className]}>
-  <h2 class:list={[
-    "uw-heading-sm text-white",
-    shadow && "drop-shadow-lg",
-  ]}>
+<div
+  class:list={[
+    centered ? "text-center max-w-3xl mx-auto" : "",
+    "space-y-4",
+    className,
+  ]}
+>
+  <h2 class="uw-heading-sm text-primary">
     {title}
   </h2>
 
-  {subtitle && (
-    <p class="font-body text-white/70 text-base sm:text-lg leading-relaxed">
-      {subtitle}
-    </p>
-  )}
+  {subtitle && <p>{subtitle}</p>}
 </div>

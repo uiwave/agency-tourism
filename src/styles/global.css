@@ -52,7 +52,7 @@
 
 :root {
   --background: #122327;
-  --foreground: #909da1;
+  --foreground: #fff;
   --primary: #0cb3db;
   --primary-foreground: #ffffff;
   --secondary: #122327;
@@ -65,6 +65,7 @@
 
 @layer base {
   body {
+    @apply text-base sm:text-lg leading-relaxed;
     font-family: var(--font-body);
     background-color: var(--background);
     color: var(--foreground);
@@ -72,11 +73,19 @@
 }
 
 @keyframes scroll-certs {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes scroll-gallery {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }

@@ -1,0 +1,61 @@
+---
+interface Props {
+  name: Record<string, string>;
+  slug: string;
+  description: Record<string, string>;
+  image: string;
+  lang: string;
+}
+
+const { name, slug, description, image, lang } = Astro.props;
+---
+
+<a
+  href={`/${lang}/tours?destination=${slug}`}
+  class="group relative flex-1 md:hover:flex-4 transition-all duration-500 ease-in-out overflow-hidden shrink-0 rounded-2xl"
+>
+  <img
+    class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out"
+    src={image}
+    alt={name[lang]}
+    loading="lazy"
+  />
+  <div
+    class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent group-hover:via-black/60 transition-all duration-500"
+  >
+  </div>
+
+  <div
+    class="md:hidden absolute inset-x-0 bottom-0 bg-black/60 backdrop-blur-xs p-4 flex items-center justify-between z-10 transition-all duration-300 group-hover:opacity-0 group-hover:pointer-events-none"
+  >
+    <span
+      class="font-heading leading-[1.05] text-[clamp(1.75rem,2.5vw+0.75rem,2.75rem)] text-white truncate pr-2 font-bold"
+    >
+      {name[lang]}
+    </span>
+  </div>
+
+  <div
+    class="hidden md:flex absolute inset-y-0 left-0 w-20 bg-black/60 backdrop-blur-xs items-center justify-center p-4 z-10 transition-all duration-300 group-hover:opacity-0 group-hover:pointer-events-none select-none"
+  >
+    <span
+      class="font-heading font-bold leading-[1.05] text-[clamp(1.75rem,2.5vw+0.75rem,2.75rem)] text-white tracking-wider uppercase [writing-mode:vertical-rl] rotate-180 whitespace-nowrap"
+    >
+      {name[lang]}
+    </span>
+  </div>
+
+  <div
+    class="absolute inset-0 flex flex-col justify-end p-6 md:p-8 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75"
+  >
+    <h3
+      class="font-heading font-bold leading-[1.05] tracking-normal text-[clamp(1.75rem,2.5vw+0.75rem,2.75rem)] text-white"
+    >
+      {name[lang]}
+    </h3>
+
+    <p class="mt-2 line-clamp-2 md:line-clamp-3">
+      {description[lang]}
+    </p>
+  </div>
+</a>

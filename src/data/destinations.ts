@@ -8,7 +8,7 @@ export interface Destination {
 export const destinations: Destination[] = [
   {
     name: { es: "Cusco", en: "Cusco", pt: "Cusco" },
-    slug: "cusco",
+    slug: "Cusco",
     description: {
       es: "Descubre la antigua capital del Imperio Inca, sus ruinas, valles sagrados y la majestuosa Machu Picchu.",
       en: "Discover the ancient capital of the Inca Empire, its ruins, sacred valleys, and majestic Machu Picchu.",
@@ -18,7 +18,7 @@ export const destinations: Destination[] = [
   },
   {
     name: { es: "Arequipa", en: "Arequipa", pt: "Arequipa" },
-    slug: "arequipa",
+    slug: "Arequipa",
     description: {
       es: "La Ciudad Blanca te espera con el Cañón del Colca, el Volcán Misti y una gastronomía incomparable.",
       en: "The White City awaits you with the Colca Canyon, Misti Volcano, and incomparable cuisine.",
@@ -28,7 +28,7 @@ export const destinations: Destination[] = [
   },
   {
     name: { es: "Ica", en: "Ica", pt: "Ica" },
-    slug: "ica",
+    slug: "Ica",
     description: {
       es: "Aventura en las dunas de Huacachina, sandboarding, buggies y las enigmáticas Líneas de Nazca.",
       en: "Adventure in the Huacachina dunes, sandboarding, buggies, and the enigmatic Nazca Lines.",
@@ -38,7 +38,7 @@ export const destinations: Destination[] = [
   },
   {
     name: { es: "Puno", en: "Puno", pt: "Puno" },
-    slug: "puno",
+    slug: "Puno",
     description: {
       es: "Bórrate en el Lago Titicaca, islas flotantes de los Uros y la cultura viva de los Andes.",
       en: "Lose yourself in Lake Titicaca, the floating Uros islands, and the living culture of the Andes.",
