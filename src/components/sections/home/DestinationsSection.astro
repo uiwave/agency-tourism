@@ -1,20 +1,19 @@
 ---
 import { destinations } from "@/data/destinations";
 import { getTranslations } from "@/i18n";
+import SectionHeading from "@/components/SectionHeading.astro";
 
 const currentLang = Astro.currentLocale || "es";
 const t = getTranslations(currentLang);
 ---
 
-<section class="uw-section overflow-hidden">
-  <div class="uw-container">
-    <div class="text-center mb-8 md:mb-14">
-      <h2 class="uw-heading-sm text-white mb-4">
-        {t["destinations.badge"]}
-      </h2>
-      <p class="font-body text-foreground/70 max-w-2xl mx-auto">
-        {t["destinations.description"]}
-      </p>
+<section class="w-full overflow-hidden">
+  <div class="uw-container uw-section pt-0">
+    <div class="mb-8 sm:mb-12">
+      <SectionHeading
+        title={t["destinations.badge"]}
+        subtitle={t["destinations.description"]}
+      />
     </div>
     <div class="flex flex-col md:flex-row gap-4 h-150 md:h-130 w-full">
       {

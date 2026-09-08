@@ -25,17 +25,13 @@ const tours = allTours
 <section class="w-full overflow-hidden">
   <div class="uw-container uw-section">
     <div class="mb-8 sm:mb-12">
-      <div>
-        <h2 class="uw-heading-sm text-white">
-          {t["popularTours.sectionTitle"]}
-        </h2>
-        <p class="font-body text-white/70 text-base sm:text-lg leading-relaxed">
-          {t["popularTours.sectionSubtitle"]}
-        </p>
-      </div>
+      <SectionHeading
+        title={t["popularTours.sectionTitle"]}
+        subtitle={t["popularTours.sectionSubtitle"]}
+        centered={false}
+      />
     </div>
 
-    {/* CARRUSEL GRID RESPONSIVE */}
     <div
       id="toursCarousel"
       class="grid grid-flow-col auto-cols-[100%] sm:auto-cols-[calc(50%-12px)] md:auto-cols-[calc(33.333%-16px)] lg:auto-cols-[calc(25%-18px)] gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory py-2 -mx-4 px-4 sm:mx-0 sm:px-0"
