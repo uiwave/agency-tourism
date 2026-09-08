@@ -2,7 +2,6 @@
 import Layout from "@/layouts/Layout.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import ContactSection from "@/components/sections/home/ContactSection.astro";
-import FaqSection from "@/components/sections/home/FaqSection.astro";
 import { getTranslations } from "@/i18n";
 
 const currentLang = Astro.currentLocale || "es";
@@ -22,5 +21,4 @@ const t = getTranslations(currentLang);
   </section>
 
   <ContactSection />
-  <FaqSection />
 </Layout>

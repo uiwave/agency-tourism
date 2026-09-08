@@ -21,7 +21,7 @@
   "popularTours.btnText": "Book Now",
   "popularTours.fromPrice": "From",
   "destinations.badge": "TOP DESTINATIONS",
-  "destinations.title": "The most spectacular corners of Brazil",
+  "destinations.title": "The most spectacular corners of Peru",
   "destinations.description": "Choose your next destination and discover itineraries designed for unforgettable experiences.",
   "destinations.exploreText": "Explore tours",
   "destinations.recommendedText": "Recommended:",
@@ -113,5 +113,7 @@
   "tourDetail.destination": "Destination",
   "tourDetail.type": "Type",
   "tourDetail.relatedTours": "Related Tours",
-  "tourDetail.backToTours": "Back to Tours"
+  "tourDetail.backToTours": "Back to Tours",
+  "gallery.badge": "GALLERY",
+  "gallery.title": "This is how Peru is experienced"
 }

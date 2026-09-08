@@ -70,3 +70,13 @@
     color: var(--foreground);
   }
 }
+
+@keyframes scroll-certs {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-gallery {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

@@ -25,7 +25,7 @@
   "popularTours.btnText": "Reservar",
   "popularTours.fromPrice": "Desde",
   "destinations.badge": "DESTINOS POPULARES",
-  "destinations.title": "Los rincones más espectaculares de Brasil",
+  "destinations.title": "Los rincones más espectaculares de Perú",
   "destinations.description": "Selecciona tu próximo destino y descubre itinerarios diseñados para vivir experiencias inolvidables.",
   "destinations.exploreText": "Explorar tours",
   "destinations.recommendedText": "Recomendado:",
@@ -117,5 +117,7 @@
   "tourDetail.destination": "Destino",
   "tourDetail.type": "Tipo",
   "tourDetail.relatedTours": "Tours Relacionados",
-  "tourDetail.backToTours": "Volver a Tours"
+  "tourDetail.backToTours": "Volver a Tours",
+  "gallery.badge": "GALERÍA",
+  "gallery.title": "Así se vive Perú"
 }
