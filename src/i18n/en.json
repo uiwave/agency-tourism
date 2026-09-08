@@ -115,5 +115,17 @@
   "tourDetail.relatedTours": "Related Tours",
   "tourDetail.backToTours": "Back to Tours",
   "gallery.badge": "GALLERY",
-  "gallery.title": "This is how Peru is experienced"
+  "gallery.title": "This is how Peru is experienced",
+  "filters.search": "Search by name...",
+  "filters.destination": "Destination",
+  "filters.duration": "Duration",
+  "filters.type": "Type",
+  "filters.price": "Price",
+  "filters.all": "All",
+  "filters.clear": "Clear",
+  "filters.showing": "Showing",
+  "filters.of": "of",
+  "filters.tours": "tours",
+  "filters.minPrice": "Min",
+  "filters.maxPrice": "Max"
 }

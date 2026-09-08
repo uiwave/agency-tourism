@@ -119,5 +119,17 @@
   "tourDetail.relatedTours": "Tours Relacionados",
   "tourDetail.backToTours": "Volver a Tours",
   "gallery.badge": "GALERÍA",
-  "gallery.title": "Así se vive Perú"
+  "gallery.title": "Así se vive Perú",
+  "filters.search": "Buscar por nombre...",
+  "filters.destination": "Destino",
+  "filters.duration": "Duración",
+  "filters.type": "Tipo",
+  "filters.price": "Precio",
+  "filters.all": "Todos",
+  "filters.clear": "Limpiar",
+  "filters.showing": "Mostrando",
+  "filters.of": "de",
+  "filters.tours": "tours",
+  "filters.minPrice": "Mín",
+  "filters.maxPrice": "Máx"
 }

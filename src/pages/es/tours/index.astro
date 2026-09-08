@@ -16,11 +16,17 @@ const tours = allTours
     id: tour.id.replace(/^[^/]+\//, ""),
     title: tour.data.title,
     duration: tour.data.duration,
-    location: tour.data.destination,
-    price: String(tour.data.price),
+    destination: tour.data.destination,
+    type: tour.data.type,
+    price: tour.data.price,
     image: tour.data.image,
     description: tour.data.description,
   }));
+
+const destinations = [...new Set(tours.map((t) => t.destination))];
+const durations = [...new Set(tours.map((t) => t.duration))];
+const types = [...new Set(tours.map((t) => t.type))];
+const maxPrice = Math.max(...tours.map((t) => t.price));
 ---
 
 <Layout>
@@ -30,24 +36,104 @@ const tours = allTours
         badge={t["toursPage.badge"]}
         title={t["toursPage.title"]}
         subtitle={t["toursPage.subtitle"]}
-        class="mb-12"
+        class="mb-10"
       />
 
-      {tours.length > 0 ? (
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {tours.map((tour) => (
-            <TourCard
-              id={tour.id}
-              title={tour.title}
-              duration={tour.duration}
-              location={tour.location}
-              price={tour.price}
-              image={tour.image}
-              description={tour.description}
-              href={getRelativeLocaleUrl(currentLang, `/tours/${tour.id}`)}
-              fromPrice={t["popularTours.fromPrice"]}
-              btnText={t["popularTours.btnText"]}
+      <!-- FILTROS -->
+      <div id="filters" class="mb-10 p-5 sm:p-6 rounded-2xl bg-card border border-border/30 space-y-4">
+        <!-- Fila 1: Búsqueda -->
+        <div class="relative">
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            type="text"
+            id="filter-search"
+            placeholder={t["filters.search"]}
+            class="w-full pl-12 pr-4 py-3 rounded-xl bg-surface border border-border text-white font-body text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+          />
+        </div>
+
+        <!-- Fila 2: Selects + Precio -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <select id="filter-destination" class="px-4 py-3 rounded-xl bg-surface border border-border text-white font-body text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer appearance-none">
+            <option value="">{t["filters.destination"]}</option>
+            {destinations.map((d) => (
+              <option value={d}>{d}</option>
+            ))}
+          </select>
+
+          <select id="filter-duration" class="px-4 py-3 rounded-xl bg-surface border border-border text-white font-body text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer appearance-none">
+            <option value="">{t["filters.duration"]}</option>
+            {durations.map((d) => (
+              <option value={d}>{d}</option>
+            ))}
+          </select>
+
+          <select id="filter-type" class="px-4 py-3 rounded-xl bg-surface border border-border text-white font-body text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer appearance-none">
+            <option value="">{t["filters.type"]}</option>
+            {types.map((tp) => (
+              <option value={tp}>{tp}</option>
+            ))}
+          </select>
+
+          <div class="flex items-center gap-2">
+            <input
+              type="number"
+              id="filter-price-min"
+              placeholder={t["filters.minPrice"]}
+              min="0"
+              max={maxPrice}
+              class="w-full px-3 py-3 rounded-xl bg-surface border border-border text-white font-body text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
+            <span class="text-white/40">-</span>
+            <input
+              type="number"
+              id="filter-price-max"
+              placeholder={t["filters.maxPrice"]}
+              min="0"
+              max={maxPrice}
+              class="w-full px-3 py-3 rounded-xl bg-surface border border-border text-white font-body text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+          </div>
+        </div>
+
+        <!-- Fila 3: Limpiar + Contador -->
+        <div class="flex items-center justify-between">
+          <button id="filter-clear" class="hidden text-sm font-body text-primary hover:text-primary/80 transition-colors cursor-pointer">
+            {t["filters.clear"]}
+          </button>
+          <p id="filter-count" class="text-sm font-body text-white/50 ml-auto">
+            {t["filters.showing"]} {tours.length} {t["filters.of"]} {tours.length} {t["filters.tours"]}
+          </p>
+        </div>
+      </div>
+
+      <!-- GRID DE TOURS -->
+      {tours.length > 0 ? (
+        <div id="tours-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {tours.map((tour) => (
+            <div
+              class="tour-card"
+              data-title={tour.title.toLowerCase()}
+              data-destination={tour.destination}
+              data-duration={tour.duration}
+              data-type={tour.type}
+              data-price={tour.price}
+            >
+              <TourCard
+                id={tour.id}
+                title={tour.title}
+                duration={tour.duration}
+                location={tour.destination}
+                price={String(tour.price)}
+                image={tour.image}
+                description={tour.description}
+                href={getRelativeLocaleUrl(currentLang, `/tours/${tour.id}`)}
+                fromPrice={t["popularTours.fromPrice"]}
+                btnText={t["popularTours.btnText"]}
+              />
+            </div>
           ))}
         </div>
       ) : (
@@ -55,6 +141,112 @@ const tours = allTours
           {t["toursPage.noResults"]}
         </p>
       )}
+
+      <!-- SIN RESULTADOS -->
+      <p id="no-results" class="hidden text-center text-white/60 font-body text-lg">
+        {t["toursPage.noResults"]}
+      </p>
     </div>
   </section>
 </Layout>
+
+<script define:vars={{ totalTours: tours.length, showingText: t["filters.showing"], ofText: t["filters.of"], toursText: t["filters.tours"] }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("filter-search");
+    const destSelect = document.getElementById("filter-destination");
+    const durSelect = document.getElementById("filter-duration");
+    const typeSelect = document.getElementById("filter-type");
+    const priceMin = document.getElementById("filter-price-min");
+    const priceMax = document.getElementById("filter-price-max");
+    const clearBtn = document.getElementById("filter-clear");
+    const countEl = document.getElementById("filter-count");
+    const noResults = document.getElementById("no-results");
+    const cards = document.querySelectorAll(".tour-card");
+    const grid = document.getElementById("tours-grid");
+
+    const params = new URLSearchParams(window.location.search);
+
+    // Init from URL
+    if (params.get("search")) searchInput.value = params.get("search");
+    if (params.get("destination")) destSelect.value = params.get("destination");
+    if (params.get("duration")) durSelect.value = params.get("duration");
+    if (params.get("type")) typeSelect.value = params.get("type");
+    if (params.get("price")) {
+      const [min, max] = params.get("price").split("-");
+      if (min) priceMin.value = min;
+      if (max) priceMax.value = max;
+    }
+
+    function applyFilters() {
+      const search = searchInput.value.toLowerCase().trim();
+      const dest = destSelect.value;
+      const dur = durSelect.value;
+      const type = typeSelect.value;
+      const pMin = priceMin.value ? Number(priceMin.value) : 0;
+      const pMax = priceMax.value ? Number(priceMax.value) : Infinity;
+
+      let visible = 0;
+
+      cards.forEach((card) => {
+        const title = card.dataset.title || "";
+        const cardDest = card.dataset.destination || "";
+        const cardDur = card.dataset.duration || "";
+        const cardType = card.dataset.type || "";
+        const cardPrice = Number(card.dataset.price) || 0;
+
+        const matchSearch = !search || title.includes(search);
+        const matchDest = !dest || cardDest === dest;
+        const matchDur = !dur || cardDur === dur;
+        const matchType = !type || cardType === type;
+        const matchPrice = cardPrice >= pMin && cardPrice <= pMax;
+
+        if (matchSearch && matchDest && matchDur && matchType && matchPrice) {
+          card.style.display = "";
+          visible++;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      countEl.textContent = `${showingText} ${visible} ${ofText} ${totalTours} ${toursText}`;
+      noResults.classList.toggle("hidden", visible > 0);
+      grid.classList.toggle("hidden", visible === 0);
+
+      const hasFilters = search || dest || dur || type || priceMin.value || priceMax.value;
+      clearBtn.classList.toggle("hidden", !hasFilters);
+
+      // Update URL
+      const url = new URL(window.location);
+      search ? url.searchParams.set("search", search) : url.searchParams.delete("search");
+      dest ? url.searchParams.set("destination", dest) : url.searchParams.delete("destination");
+      dur ? url.searchParams.set("duration", dur) : url.searchParams.delete("duration");
+      type ? url.searchParams.set("type", type) : url.searchParams.delete("type");
+
+      if (priceMin.value || priceMax.value) {
+        url.searchParams.set("price", `${priceMin.value || 0}-${priceMax.value || ""}`);
+      } else {
+        url.searchParams.delete("price");
+      }
+
+      history.replaceState(null, "", url);
+    }
+
+    [searchInput, destSelect, durSelect, typeSelect, priceMin, priceMax].forEach((el) => {
+      el.addEventListener("input", applyFilters);
+      el.addEventListener("change", applyFilters);
+    });
+
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      destSelect.value = "";
+      durSelect.value = "";
+      typeSelect.value = "";
+      priceMin.value = "";
+      priceMax.value = "";
+      applyFilters();
+    });
+
+    // Initial filter from URL
+    applyFilters();
+  });
+</script>

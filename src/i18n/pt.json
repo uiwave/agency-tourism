@@ -115,5 +115,17 @@
   "tourDetail.relatedTours": "Passeios Relacionados",
   "tourDetail.backToTours": "Voltar aos Passeios",
   "gallery.badge": "GALERIA",
-  "gallery.title": "Assim se vive o Peru"
+  "gallery.title": "Assim se vive o Peru",
+  "filters.search": "Pesquisar por nome...",
+  "filters.destination": "Destino",
+  "filters.duration": "Duracao",
+  "filters.type": "Tipo",
+  "filters.price": "Preco",
+  "filters.all": "Todos",
+  "filters.clear": "Limpar",
+  "filters.showing": "Mostrando",
+  "filters.of": "de",
+  "filters.tours": "passeios",
+  "filters.minPrice": "Min",
+  "filters.maxPrice": "Max"
 }
